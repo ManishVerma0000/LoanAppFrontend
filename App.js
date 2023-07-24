@@ -1,10 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import React, { useEffect, useState } from 'react';
+import HomePage from './src/screens/HomePage';
+import HomePage2 from './src/screens/Homepage2';
+import HomePage3 from './src/screens/HomePage3';
+import Loginpage from './src/screens/LoginPage';
+import StepOne from './src/screens/Stepone';
+import Passworcreate from './src/screens/Passwordcreate';
+import * as Font from 'expo-font';
 export default function App() {
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Passworcreate />
+      {/* <StepOne /> */}
+      {/* <Loginpage /> */}
+      {/* <HomePage3 /> */}
+      {/* 
+      <HomePage2 /> */}
+      {/* <HomePage /> */}
       <StatusBar style="auto" />
     </View>
   );
