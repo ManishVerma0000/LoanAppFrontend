@@ -2,8 +2,6 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function StepOne() {
-
-
     return (
 
         <View>

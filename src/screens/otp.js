@@ -1,96 +1,50 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid } from "react-native";
+import React from "react";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Toast from 'react-native-toast-message';
-import api from "../../api/api";
-export default function Loginpage() {
-    const [email, setemail] = useState('')
-    const [password, setPassword] = useState('')
-    const handleInputChange = (text) => {
-        setemail(text);
-    };
-    const handleInputChangepassword = (text) => {
-        setPassword(text);
-    }
-    const functionclick = () => {
-        console.log(email)
-        console.log(password)
-        const data = {
-            email: email,
-            password: password
-        }
-        api.post("/login", data, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }).then((data) => {
-            console.log(data)
-            Toast.show({
-                type: 'success', // 'info', 'success', 'error', 'none'
-                text1: 'login success',
-                position: 'bottom', // 'top', 'center', 'bottom'
-                visibilityTime: 2000, // Duration of the toast message in milliseconds
-            });
-        }).catch((err) => {
-            console.log(err)
-            Toast.show({
-                type: 'error', // 'info', 'success', 'error', 'none'
-                text1: 'login not success',
-                position: 'top', // 'top', 'center', 'bottom'
-                visibilityTime: 2000, // Duration of the toast message in milliseconds
-            });
-        })
-    }
+export default function Otp() {
     return (
+
         <View>
-            <Toast />
             <View style={styles.container}>
-
-
                 <View style={styles.imagecontainer}>
-                    <Image source={require('../../assets/rotateImage.png')}></Image>
+                    <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
-                <View style={styles.headerofallinput} >
-                    <View style={styles.inputcontainer}>
-                        <Text style={styles.textwelcome}> Welcome Back  </Text>
-                        <View style={styles.textmaindiv}>
-                            <Text style={styles.pleasetext}>Please</Text>
-                            <Text style={styles.login}>Login</Text>
-                            <Text style={styles.continue}>to continue</Text>
-                        </View>
-                    </View>
+
+                <View style={styles.StepOne}>
+                    <Image source={require('../../assets/Steone.png')}></Image>
+                </View>
+                <View style={styles.textmaindiv}>
+                    <Text style={styles.pleasetext}>
+                        Enter OTP
+                    </Text>
+                    <Text style={styles.login} >
+                        sent to
+                    </Text>
+                    <Text style={styles.continue}>
+                        your mobile
+                    </Text>
+
+                </View>
+
+                <View>
+                    <Text style={{ fontSize: 23, fontWeight: "bold", margin: 10 }}> +91 8818040732</Text>
+
                     <View style={styles.emailinputtag}>
-                        <Text>Email</Text>
+                        <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Enter the Otp</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Enter your email"
+                            placeholder="enter the otp"
                             keyboardType="email-address"
                             autoCapitalize="none"
-                            onChangeText={handleInputChange}
                         />
                     </View>
 
-                    <View style={styles.inputtagofpassword}>
-                        <Text>Password</Text>
-                        <TextInput
-                            style={styles.input}
-
-                            placeholder="Enter your password"
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            onChangeText={handleInputChangepassword}
-                        />
-
-                    </View>
 
                 </View>
-                <View style={styles.password}>
-                    <Text>Forget Password</Text>
-                </View>
+
                 <View style={styles.passwordbtn}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText} onPress={functionclick
-                        }>Click Me</Text>
+                        <Text style={styles.buttonText}>Click Me</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>
@@ -101,9 +55,9 @@ export default function Loginpage() {
                 <View style={styles.textheadsection}>
                     <Text>
                         <Text style={styles.innertext}>
-                            Not a Member,
+                            Already a  Member,
                         </Text>
-                        <Text style={styles.register}> Register Now</Text>
+                        <Text style={styles.register}> Login Now</Text>
                     </Text>
                 </View>
             </View>
@@ -111,7 +65,7 @@ export default function Loginpage() {
                 <Image source={require('../../assets/bottomlogin.png')}>
                 </Image>
             </View>
-        </View >
+        </View>
     )
 }
 
@@ -142,7 +96,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    StepOne: {
+        margin: 10,
 
+    },
 
     headerofallinput: {
         margin: 10
@@ -153,7 +110,7 @@ const styles = StyleSheet.create({
     },
     emailinputtag: {
         color: "#5045E6",
-        margin: 20
+        margin: 10
     },
 
     leftsideimage: {
@@ -165,7 +122,6 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: 'center',
         alignItems: "center",
-
         lineHeight: "21.13px",
         fontWeight: '500'
     },
@@ -182,14 +138,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'center',
         alignItems: 'center'
-
-
-
     },
     fontawesome: {
         fontFamily: 'Roboto',
         fontSize: 16,
-        backgroundColor: "green"
+
 
     },
     button: {
@@ -202,7 +155,6 @@ const styles = StyleSheet.create({
         height: 45,
         backgroundColor: "#5045E6",
         margin: 10
-
     },
     buttonText: {
         color: 'black',
@@ -242,5 +194,8 @@ const styles = StyleSheet.create({
 
 
     },
+    Image: {
+
+    }
 
 })

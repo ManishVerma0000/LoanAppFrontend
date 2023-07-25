@@ -7,13 +7,18 @@ import HomePage3 from './src/screens/HomePage3';
 import Loginpage from './src/screens/LoginPage';
 import StepOne from './src/screens/Stepone';
 import Passworcreate from './src/screens/Passwordcreate';
+// import OTP from './src/screens/otp';
+import Otp from './src/screens/otp';
+import PersonalDetails from './src/screens/PersonalDetails';
 import * as Font from 'expo-font';
 export default function App() {
 
 
   return (
     <View style={styles.container}>
-      <Passworcreate />
+      <PersonalDetails />
+      {/* <Otp /> */}
+      {/* <Passworcreate /> */}
       {/* <StepOne /> */}
       {/* <Loginpage /> */}
       {/* <HomePage3 /> */}
