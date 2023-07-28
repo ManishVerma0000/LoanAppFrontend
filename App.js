@@ -7,6 +7,10 @@ import HomePage3 from './src/screens/HomePage3';
 import Loginpage from './src/screens/LoginPage';
 import StepOne from './src/screens/Stepone';
 import Passworcreate from './src/screens/Passwordcreate';
+import Success from './src/screens/Success';
+import Card from './src/screens/Card';
+import loanApplication from './src/screens/loanApplication';
+
 // import OTP from './src/screens/otp';
 import Otp from './src/screens/otp';
 import PersonalDetails from './src/screens/PersonalDetails';
@@ -16,7 +20,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <PersonalDetails />
+      {/* <Card /> */}
+      <loanApplication />
+
+      {/* <Success /> */}
+      {/* <PersonalDetails /> */}
       {/* <Otp /> */}
       {/* <Passworcreate /> */}
       {/* <StepOne /> */}
