@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import { steponedetails } from "../redux/action";
+import { useDispatch } from 'react-redux'
+
+
+
 export default function StepOne() {
+    const [email, setEmail] = useState('')
+    const [fullname, setFullname] = useState('')
+    const [phonenumber, setphonenumber] = useState('')
+
+
+    const clickmefunction = (data) => {
+        console.warn('helllooooo');
+        useDispatch(steponedetails(data))
+    }
     return (
 
         <View>
@@ -34,6 +49,9 @@ export default function StepOne() {
                             placeholder="Enter the name"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                setFullname(text)
+                            }}
                         />
                     </View>
                     <View style={styles.emailinputtag}>
@@ -43,6 +61,9 @@ export default function StepOne() {
                             placeholder="user@gmail.com"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                setEmail(text)
+                            }}
                         />
                     </View>
                     <View style={styles.emailinputtag}>
@@ -52,13 +73,23 @@ export default function StepOne() {
                             placeholder="+91"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                setphonenumber(text)
+                            }}
                         />
                     </View>
 
                 </View>
 
                 <View style={styles.passwordbtn}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        steponedetails({
+                            email: email,
+                            fullname: fullname,
+                            phonenumber: phonenumber
+
+                        })
+                    }}>
                         <Text style={styles.buttonText}>Click Me</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
 export default function Loginpage() {

@@ -5,11 +5,14 @@ import Footer from "./Footer";
 
 
 
-export default function loanApplication() {
+export default function LoanApplication() {
     return (
         <View style={styles.topcontainer} >
             <View style={styles.innercontainer}>
-                
+                <Text>
+                    this is the text
+                </Text>
+
 
             </View>
 

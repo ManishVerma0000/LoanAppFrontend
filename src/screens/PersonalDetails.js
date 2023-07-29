@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid } from "react-native";
 
 
@@ -112,7 +112,6 @@ export default function PersonalDetails() {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     Imagestyle: {
         height: 44,

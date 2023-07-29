@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, Button, TouchableOpacity, ToastAndroid } from "react-native";
+import { Text, View, StyleSheet, Image, Button, TouchableOpacity, } from "react-native";
 import Footer from "./Footer";
 
 

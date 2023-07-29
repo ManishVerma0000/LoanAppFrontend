@@ -1,0 +1,1 @@
+export const Step_One_details="steponedetails";
