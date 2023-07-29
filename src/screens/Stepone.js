@@ -5,9 +5,8 @@ import axios from 'axios';
 import { steponedetails } from "../redux/action";
 import { useDispatch } from 'react-redux'
 
-
-
 export default function StepOne(props) {
+
     const [email, setEmail] = useState('')
     const [fullname, setFullname] = useState('')
     const [phonenumber, setphonenumber] = useState('')
@@ -19,7 +18,7 @@ export default function StepOne(props) {
         useDispatch(steponedetails(data))
     }
     const functionnexpage = () => {
-        props.navigation.navigate("Password")
+        props.navigation.navigate("personaldetails")
     }
     return (
         <View>
@@ -88,10 +87,11 @@ export default function StepOne(props) {
                             fullname: fullname,
                             phonenumber: phonenumber
 
-                        }),
-                            functionnexpage
+                        })
+
+
                     }}>
-                        <Text style={styles.buttonText}>Next</Text>
+                        <Text style={styles.buttonText} onPress={functionnexpage}>Next</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>

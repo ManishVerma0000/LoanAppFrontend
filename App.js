@@ -11,18 +11,22 @@ import Loginpage from './src/screens/LoginPage';
 import StepOne from './src/screens/Stepone';
 import Passworcreate from './src/screens/Passwordcreate';
 import Success from './src/screens/Success';
+import DocumentUpload from './src/screens/DocumnetUpload';
 import Card from './src/screens/Card';
 import LoanApplication from './src/screens/loanApplication';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Otp from './src/screens/Otp';
 import PersonalDetails from './src/screens/PersonalDetails';
+import HomaLoanApplication from './src/screens/HomeLoanApplication';
 export default function App() {
   const Stack = createStackNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Application">
+          <Stack.Screen name="Application" component={HomaLoanApplication} />
+          <Stack.Screen name="Upload" component={DocumentUpload} />
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Home2" component={HomePage2} />
           <Stack.Screen name="Home3" component={HomePage3} />

@@ -1,16 +1,32 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid, DatePickerAndroid } from "react-native";
 import { Picker } from '@react-native-picker/picker';
+// import DocumentPicker from 'react-native-document-picker';
+import * as DocumentPicker from 'expo-document-picker';
+import Footer from "./Footer";
 
 
 
-export default function PersonalDetails() {
-    const [selectedOption, setSelectedOption] = useState('Male');
+export default function DocumentUpload() {
 
-    const options = ['Select', 'Unmarried', 'Married'];
+    const [fileUri, setFileUri] = useState(null);
 
-    const handleChangeOption = (option) => {
-        setSelectedOption(option);
+
+    const pickDocument = async () => {
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+
+            });
+
+            if (result.type === "success") {
+                console.log(result);
+                setFileUri(result.uri);
+            } else {
+                console.log("Document picker was canceled.");
+            }
+        } catch (err) {
+            console.log("Error while picking document:", err);
+        }
     };
 
 
@@ -25,7 +41,7 @@ export default function PersonalDetails() {
 
             <View >
                 <Text style={styles.PersonalDetails}>
-                    Personal Details
+                    Documentation
                 </Text>
 
             </View>
@@ -34,10 +50,10 @@ export default function PersonalDetails() {
 
 
                 <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Name According To legal Document</Text>
+                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Address</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="enter the Name"
+                        placeholder="enter the address"
                         keyboardType="email-address"
                         autoCapitalize="none"
                     />
@@ -49,10 +65,10 @@ export default function PersonalDetails() {
 
 
                 <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Date Of Birth</Text>
+                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Employment Information</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="enter the Birth"
+                        placeholder="Employment Information"
                         keyboardType="email-address"
                         autoCapitalize="none"
                     />
@@ -61,47 +77,39 @@ export default function PersonalDetails() {
 
             </View>
             <View>
+            </View>
+            <Text style={{ marginLeft: 30, marginBottom: 10, color: "black", fontWeight: "600" }}>Uplaod Addhar Card</Text>
+            <View style={styles.emailinputtag1}>
 
-
-                <View style={styles.emailinputtag1}>
-                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Marital Status</Text>
-                    <Picker
-                        selectedValue={selectedOption}
-                        onValueChange={handleChangeOption}
-                        style={styles.picker}
-                    >
-                        {options.map((option) => (
-                            <Picker.Item key={option} label={option} value={option} />
-                        ))}
-                    </Picker>
-
+                <View>
+                    <TouchableOpacity onPress={pickDocument}>
+                        <Text>Select File</Text>
+                    </TouchableOpacity>
+                    {/* {fileUri && <Text>Selected File: {fileUri}</Text>} */}
                 </View>
             </View>
-            <View>
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="enter the Email"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
+
+
+            <Text style={{ marginLeft: 30, marginBottom: 10, color: "black", fontWeight: "600" }}>Uplaod Pan Card</Text>
+            <View style={styles.emailinputtag1}>
+
+                <View>
+                    <TouchableOpacity onPress={pickDocument}>
+                        <Text>Select File</Text>
+                    </TouchableOpacity>
+
+                    {/* {fileUri && <Text>Selected File: {fileUri}</Text>} */}
                 </View>
-
-
             </View>
 
-            <View>
+            <Text style={{ marginLeft: 30, marginBottom: 10, color: "black", fontWeight: "600" }}>Uplaod FORM 16</Text>
+            <View style={styles.emailinputtag1}>
 
-
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Phone Number</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Enter the Phone Number"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
+                <View>
+                    <TouchableOpacity onPress={pickDocument}>
+                        <Text>Select File</Text>
+                    </TouchableOpacity>
+                    {/* {fileUri && <Text>Selected File: {fixleUri}</Text>} */}
                 </View>
             </View>
 
@@ -111,20 +119,19 @@ export default function PersonalDetails() {
                     >Click Me</Text>
                 </TouchableOpacity>
             </View>
-
-
-
-
         </View>
+
     )
 }
 const styles = StyleSheet.create({
     emailinputtag1: {
-        color: "#5045E6",
+
         marginLeft: 30,
         marginBottom: 20,
-        borderRadius: 5,
-        borderColor: "black"
+        borderWidth: 1,
+        borderRadius: 8,
+        height: 40,
+        marginRight: 50
     },
     Imagestyle: {
         height: 44,
@@ -184,7 +191,9 @@ const styles = StyleSheet.create({
     emailinputtag: {
         color: "#5045E6",
         marginLeft: 30,
-        marginBottom: 20
+        marginBottom: 20,
+
+        borderRadius: 8,
     },
     textheadsection: {
         display: "flex",
