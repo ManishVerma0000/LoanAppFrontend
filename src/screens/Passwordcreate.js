@@ -1,15 +1,15 @@
 import React from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
-
-export default function Passworcreate() {
+export default function Passworcreate(props) {
+    const nextpageotp = () => {
+        props.navigation.navigate("otp")
+    }
     return (
-
         <View>
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
-
                 <View style={styles.StepOne}>
                     <Image source={require('../../assets/password.png')}></Image>
                 </View>
@@ -50,7 +50,7 @@ export default function Passworcreate() {
                 </View>
 
                 <View style={styles.passwordbtn}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={nextpageotp}>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableOpacity>
                 </View>
@@ -79,7 +79,6 @@ export default function Passworcreate() {
 const styles = StyleSheet.create({
     login: {
         color: "blue"
-
 
     },
     textmaindiv: {

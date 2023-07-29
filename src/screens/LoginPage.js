@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
-export default function Loginpage() {
+export default function Loginpage(props) {
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
     const handleInputChange = (text) => {
@@ -10,6 +10,9 @@ export default function Loginpage() {
     };
     const handleInputChangepassword = (text) => {
         setPassword(text);
+    }
+    const registerfunction = () => {
+        props.navigation.navigate("Register")
     }
     const functionclick = () => {
         console.log(email)
@@ -39,6 +42,8 @@ export default function Loginpage() {
                 visibilityTime: 2000, // Duration of the toast message in milliseconds
             });
         })
+
+
     }
     return (
         <View>
@@ -102,7 +107,7 @@ export default function Loginpage() {
                         <Text style={styles.innertext}>
                             Not a Member,
                         </Text>
-                        <Text style={styles.register}> Register Now</Text>
+                        <Text style={styles.register} onPress={registerfunction}> Register Now</Text>
                     </Text>
                 </View>
             </View>

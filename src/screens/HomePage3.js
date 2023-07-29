@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 
-export default function HomePage3() {
+export default function HomePage3(props) {
+    const getstarted = () => {
+        props.navigation.navigate('Login')
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -32,16 +35,36 @@ export default function HomePage3() {
                 <Text>
                     Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
                 </Text>
-
             </View>
             <StatusBar style="auto" />
+            <View style={styles.buttonpressme}>
+
+                < Button title='Get Started' onPress={getstarted}></Button>
+
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    btn: {
+        backgroundColor: "blue",
+        width: 100,
+        height: 50,
+        fontWeight: "bold"
+    },
+    buttonpressme: {
+
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    text2: {
+        color: "black",
+        fontWeight: "bold"
+    },
     lowertext: {
-        backgroundColor: "yellow",
+
         justifyContent: "center",
         alignItems: "center",
         padding: 30

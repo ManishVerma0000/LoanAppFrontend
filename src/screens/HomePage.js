@@ -1,7 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-
-export default function HomePage() {
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+export default function HomePage(props) {
+    const rendertothenextpage = () => {
+        console.warn("hello")
+        props.navigation.navigate("Home2")
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -34,18 +39,27 @@ export default function HomePage() {
                 </Text>
 
             </View>
-            <StatusBar style="auto" />
-        </View>
+            <View style={styles.bootombluecolor}>
+
+                <TouchableOpacity onPress={rendertothenextpage}>
+                    <Image source={require("../../assets/bluenextbutton.png")}>
+                    </Image>
+                </TouchableOpacity>
+            </View>
+        </View >
     );
 }
 
 const styles = StyleSheet.create({
+    bootombluecolor: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
     lowertext: {
-        backgroundColor: "yellow",
         justifyContent: "center",
         alignItems: "center",
         padding: 30
-
     },
     textmoney: {
         height: 30,
@@ -76,7 +90,6 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
-
     }
 });
 

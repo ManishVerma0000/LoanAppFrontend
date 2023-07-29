@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
+
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import HomePage from './src/screens/HomePage';
@@ -32,7 +33,7 @@ export default function App() {
           <Stack.Screen name="LoanApplication" component={LoanApplication} />
           <Stack.Screen name="Password" component={Passworcreate} />
           <Stack.Screen name="Login" component={Loginpage} />
-          <Stack.Screen name="Stepone" component={StepOne} />
+          <Stack.Screen name="Register" component={StepOne} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

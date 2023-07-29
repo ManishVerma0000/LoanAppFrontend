@@ -7,24 +7,26 @@ import { useDispatch } from 'react-redux'
 
 
 
-export default function StepOne() {
+export default function StepOne(props) {
     const [email, setEmail] = useState('')
     const [fullname, setFullname] = useState('')
     const [phonenumber, setphonenumber] = useState('')
-
-
+    const functionlogin = () => {
+        props.navigation.navigate("Login")
+    }
     const clickmefunction = (data) => {
         console.warn('helllooooo');
         useDispatch(steponedetails(data))
     }
+    const functionnexpage = () => {
+        props.navigation.navigate("Password")
+    }
     return (
-
         <View>
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
-
                 <View style={styles.StepOne}>
                     <Image source={require('../../assets/Steone.png')}></Image>
                 </View>
@@ -38,9 +40,7 @@ export default function StepOne() {
                     <Text style={styles.continue}>
                         to continue
                     </Text>
-
                 </View>
-
                 <View>
                     <View style={styles.emailinputtag}>
                         <Text>Full Name</Text>
@@ -88,9 +88,10 @@ export default function StepOne() {
                             fullname: fullname,
                             phonenumber: phonenumber
 
-                        })
+                        }),
+                            functionnexpage
                     }}>
-                        <Text style={styles.buttonText}>Click Me</Text>
+                        <Text style={styles.buttonText}>Next</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>
@@ -103,7 +104,7 @@ export default function StepOne() {
                         <Text style={styles.innertext}>
                             Already a  Member,
                         </Text>
-                        <Text style={styles.register}> Login Now</Text>
+                        <Text style={styles.register} onPress={functionlogin}> Login Now</Text>
                     </Text>
                 </View>
             </View>

@@ -1,7 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function HomePage() {
+export default function HomePage2(props) {
+    const leftsidefunction = () => {
+        props.navigation.navigate("Home")
+    }
+    const rightsidefunction = () => {
+        props.navigation.navigate("Home3")
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -32,16 +38,43 @@ export default function HomePage() {
                 <Text>
                     Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
                 </Text>
-
             </View>
-            <StatusBar style="auto" />
+
+            <View style={styles.twoimages}>
+                <View>
+                    <TouchableOpacity onPress={leftsidefunction}>
+                        <Image source={require("../../assets/leftsidebutton.png")}></Image>
+                    </TouchableOpacity>
+
+                </View>
+                <View>
+                    <TouchableOpacity onPress={rightsidefunction}>
+                        <Image source={require("../../assets/bluenextbutton.png")}></Image>
+
+                    </TouchableOpacity>
+
+
+                </View>
+            </View>
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    twoimages: {
+        display: 'flex',
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+    text2: {
+        color: "black",
+        fontWeight: "bold",
+
+    },
     lowertext: {
-        backgroundColor: "yellow",
+
         justifyContent: "center",
         alignItems: "center",
         padding: 30
