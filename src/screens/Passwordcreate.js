@@ -1,7 +1,13 @@
 import React from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { useSelector } from "react-redux";
 export default function Passworcreate(props) {
+    const userdata = useSelector((state) => state.reducer)
+    console.log(userdata)
+    console.warn(userdata)
     const nextpageotp = () => {
+
+
         props.navigation.navigate("otp")
     }
     return (

@@ -3,13 +3,11 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView 
 
 export default function Otp() {
     return (
-
         <View>
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
-
                 <View style={styles.StepOne}>
                     <Image source={require('../../assets/Steone.png')}></Image>
                 </View>

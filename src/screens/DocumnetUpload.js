@@ -3,24 +3,54 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroi
 import { Picker } from '@react-native-picker/picker';
 // import DocumentPicker from 'react-native-document-picker';
 import * as DocumentPicker from 'expo-document-picker';
+import Toast from 'react-native-toast-message';
 import Footer from "./Footer";
-
-
+import axios from "axios";
 
 export default function DocumentUpload() {
 
-    const [fileUri, setFileUri] = useState(null);
+    const formData = new FormData();
 
+    const [fileurifor16, setFileUriForForm16] = useState(null);
+    const [panccard, setFileUriForPanCard] = useState(null);
+    const [address, setaddress] = useState('');
+    const [fileuriforAddhar, setfileUriForAddhar] = useState(null);
+    const [employment, setEmployementinformation] = useState('');
 
-    const pickDocument = async () => {
+    const pickDocumentforForm16 = async () => {
         try {
-            const result = await DocumentPicker.getDocumentAsync({
-
-            });
-
+            const result = await DocumentPicker.getDocumentAsync({});
             if (result.type === "success") {
                 console.log(result);
-                setFileUri(result.uri);
+                setFileUriForForm16(result);
+            } else {
+                console.log("Document picker was canceled.");
+            }
+        } catch (err) {
+            console.log("Error while picking document:", err);
+        }
+    }
+
+    const pickDocumentforpancard = async () => {
+        try {
+            const result = await DocumentPicker.getDocumentAsync({});
+            if (result.type === "success") {
+                console.log(result);
+                setFileUriForPanCard(result);
+            } else {
+                console.log("Document picker was canceled.");
+            }
+        } catch (err) {
+            console.log("Error while picking document:", err);
+        }
+    }
+
+    const pickDocumentforAdddhar = async () => {
+        try {
+            const result = await DocumentPicker.getDocumentAsync({});
+            if (result.type === "success") {
+                console.log(result);
+                setfileUriForAddhar(result);
             } else {
                 console.log("Document picker was canceled.");
             }
@@ -28,6 +58,39 @@ export default function DocumentUpload() {
             console.log("Error while picking document:", err);
         }
     };
+
+    const uplaoddocument = () => {
+        formData.set("panCard", panccard.file);
+        formData.set("aadharCard", fileuriforAddhar.file);
+        formData.set('form16', fileurifor16.file);
+        formData.append("Address", address);
+        formData.append("information", employment);
+        axios.post("http://localhost:7000/api/document", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        })
+            .then((data) => {
+                console.log(data);
+                Toast.show({
+                    type: 'success',
+                    text1: 'Uploaded success',
+                    position: 'bottom',
+                    visibilityTime: 2000,
+                });
+
+
+            })
+            .catch((err) => {
+                console.log(err);
+                Toast.show({
+                    type: 'error',
+                    text1: 'login not success',
+                    position: 'top',
+                    visibilityTime: 2000,
+                });
+            });
+    }
 
 
     return (
@@ -38,17 +101,13 @@ export default function DocumentUpload() {
                 <Image style={styles.Imagestyle} source={require("../../assets/g10.png")}></Image>
             </View>
 
-
             <View >
                 <Text style={styles.PersonalDetails}>
                     Documentation
                 </Text>
 
             </View>
-
             <View>
-
-
                 <View style={styles.emailinputtag}>
                     <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Address</Text>
                     <TextInput
@@ -56,6 +115,9 @@ export default function DocumentUpload() {
                         placeholder="enter the address"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChangeText={(text) => {
+                            setaddress(text)
+                        }}
                     />
                 </View>
 
@@ -71,6 +133,9 @@ export default function DocumentUpload() {
                         placeholder="Employment Information"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChangeText={(text) => {
+                            setEmployementinformation(text)
+                        }}
                     />
                 </View>
 
@@ -82,7 +147,7 @@ export default function DocumentUpload() {
             <View style={styles.emailinputtag1}>
 
                 <View>
-                    <TouchableOpacity onPress={pickDocument}>
+                    <TouchableOpacity onPress={pickDocumentforAdddhar} >
                         <Text>Select File</Text>
                     </TouchableOpacity>
                     {/* {fileUri && <Text>Selected File: {fileUri}</Text>} */}
@@ -94,7 +159,7 @@ export default function DocumentUpload() {
             <View style={styles.emailinputtag1}>
 
                 <View>
-                    <TouchableOpacity onPress={pickDocument}>
+                    <TouchableOpacity onPress={pickDocumentforpancard}>
                         <Text>Select File</Text>
                     </TouchableOpacity>
 
@@ -106,7 +171,7 @@ export default function DocumentUpload() {
             <View style={styles.emailinputtag1}>
 
                 <View>
-                    <TouchableOpacity onPress={pickDocument}>
+                    <TouchableOpacity onPress={pickDocumentforForm16}>
                         <Text>Select File</Text>
                     </TouchableOpacity>
                     {/* {fileUri && <Text>Selected File: {fixleUri}</Text>} */}
@@ -114,7 +179,7 @@ export default function DocumentUpload() {
             </View>
 
             <View style={styles.passwordbtn}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={uplaoddocument}>
                     <Text style={styles.buttonText}
                     >Click Me</Text>
                 </TouchableOpacity>

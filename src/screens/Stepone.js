@@ -10,15 +10,22 @@ export default function StepOne(props) {
     const [email, setEmail] = useState('')
     const [fullname, setFullname] = useState('')
     const [phonenumber, setphonenumber] = useState('')
+
     const functionlogin = () => {
+
         props.navigation.navigate("Login")
     }
-    const clickmefunction = (data) => {
-        console.warn('helllooooo');
-        useDispatch(steponedetails(data))
+    const senddata = {
+        email: email,
+        fullname: fullname,
+        phonenumber: phonenumber
     }
+
     const functionnexpage = () => {
-        props.navigation.navigate("personaldetails")
+        // console.warn(fullname)
+        console.warn(email)
+        console.warn(phonenumber)
+        props.navigation.navigate("Password", { data: senddata })
     }
     return (
         <View>

@@ -24,7 +24,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Application">
+        <Stack.Navigator initialRouteName="Upload">
           <Stack.Screen name="Application" component={HomaLoanApplication} />
           <Stack.Screen name="Upload" component={DocumentUpload} />
           <Stack.Screen name="Home" component={HomePage} />

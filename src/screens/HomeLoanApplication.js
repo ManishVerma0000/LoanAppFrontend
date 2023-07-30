@@ -1,7 +1,5 @@
 import { React, useState } from 'react';
 import { View, Text, StyleSheet, Image, Button, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-
-import { CheckBox } from 'react-native-elements';
 import Footer from './Footer';
 
 
@@ -22,7 +20,6 @@ export default function HomaLoanApplication() {
                     <Text style={styles.textapplication}>Home Loan Application</Text>
                     <Image source={require('../../assets/face.png')}></Image>
                 </View>
-
                 <View style={styles.containersecond}>
                     <View>
                         <View>
@@ -52,8 +49,6 @@ export default function HomaLoanApplication() {
                         </View>
                     </View>
                 </View>
-
-
                 <View style={styles.containersecond}>
                     <View>
                         <View>
@@ -83,7 +78,6 @@ export default function HomaLoanApplication() {
                         </View>
                     </View>
                 </View>
-
                 <View style={styles.containersecond}>
                     <View>
                         <View>
