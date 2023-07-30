@@ -6,26 +6,20 @@ import { steponedetails } from "../redux/action";
 import { useDispatch } from 'react-redux'
 
 export default function StepOne(props) {
-
+    const dispatch = useDispatch()
     const [email, setEmail] = useState('')
     const [fullname, setFullname] = useState('')
     const [phonenumber, setphonenumber] = useState('')
 
     const functionlogin = () => {
-
         props.navigation.navigate("Login")
     }
-    const senddata = {
-        email: email,
-        fullname: fullname,
-        phonenumber: phonenumber
-    }
 
-    const functionnexpage = () => {
-        // console.warn(fullname)
-        console.warn(email)
-        console.warn(phonenumber)
-        props.navigation.navigate("Password", { data: senddata })
+    const addthevalue = (data) => {
+        console.warn(data)
+        dispatch(steponedetails(data))
+        props.navigation.navigate("Password")
+
     }
     return (
         <View>
@@ -98,7 +92,15 @@ export default function StepOne(props) {
 
 
                     }}>
-                        <Text style={styles.buttonText} onPress={functionnexpage}>Next</Text>
+                        <Text style={styles.buttonText} onPress={() => {
+                            // functionnexpage,
+                            addthevalue({
+                                email: email,
+                                phonenumber: phonenumber,
+                                fullname: fullname
+                            })
+
+                        }}>Next</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>

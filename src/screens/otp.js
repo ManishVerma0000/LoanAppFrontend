@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { useSelector } from "react-redux";
 
 export default function Otp() {
+    const [phone, setphone] = useState('')
+    const passworddetailsdata = useSelector((state) => state.passwoprdreducer)
+    const usedetails = useSelector((state) => state.reducer)
+    useEffect(() => {
+        usedetails[0].phonenumber
+        setphone(usedetails[0].phonenumber)
+    }, [])
+
+
     return (
         <View>
             <View style={styles.container}>
@@ -25,7 +35,7 @@ export default function Otp() {
                 </View>
 
                 <View>
-                    <Text style={{ fontSize: 23, fontWeight: "bold", margin: 10 }}> +91 8818040732</Text>
+                    <Text style={{ fontSize: 23, fontWeight: "bold", margin: 10 }}> {phone}</Text>
 
                     <View style={styles.emailinputtag}>
                         <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Enter the Otp</Text>

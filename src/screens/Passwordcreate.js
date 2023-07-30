@@ -1,14 +1,51 @@
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux'
+import { passwordDetails } from "../redux/action";
+import axios from "axios"
 export default function Passworcreate(props) {
+
     const userdata = useSelector((state) => state.reducer)
     console.log(userdata)
-    console.warn(userdata)
-    const nextpageotp = () => {
+    const [password, setpassword] = useState("")
+    const [confirmapassword, setconfirmpassword] = useState('')
+    const [firstname, setFirstname] = useState('')
+    const [phone, setphone] = useState('')
+    const [email, setEmail] = useState('')
 
-
+    const dispatch = useDispatch()
+    const nextpageotp = (data) => {
+        dispatch(passwordDetails(data))
         props.navigation.navigate("otp")
+    }
+    useEffect(() => {
+        setFirstname(userdata[0].fullname)
+        setEmail(userdata[0].email)
+        setphone(userdata[0].phonenumber)
+
+    }, [])
+
+    const registercomplete = () => {
+        if (password == confirmapassword) {
+            const data = {
+                email: email,
+                firstname: firstname,
+                phone: phone,
+                password: password
+            }
+            axios.post("http://localhost:7000/api/signup", data).then((data) => {
+                console.log(data)
+            }).catch((err) => {
+                console.log(err)
+            })
+        } else {
+
+        }
+
+
+
+
     }
     return (
         <View>
@@ -40,6 +77,9 @@ export default function Passworcreate(props) {
                             placeholder="Enter the Password"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                setpassword(text)
+                            }}
                         />
                     </View>
                     <View style={styles.emailinputtag}>
@@ -49,6 +89,9 @@ export default function Passworcreate(props) {
                             placeholder="Confirm Password"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={(text) => {
+                                setconfirmpassword(text)
+                            }}
                         />
                     </View>
 
@@ -56,7 +99,13 @@ export default function Passworcreate(props) {
                 </View>
 
                 <View style={styles.passwordbtn}>
-                    <TouchableOpacity style={styles.button} onPress={nextpageotp}>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        nextpageotp({
+                            password: password,
+                            confirmapassword: confirmapassword
+                        }),
+                            registercomplete()
+                    }}>
                         <Text style={styles.buttonText}>Next</Text>
                     </TouchableOpacity>
                 </View>
