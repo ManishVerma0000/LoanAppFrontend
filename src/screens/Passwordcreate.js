@@ -7,7 +7,7 @@ import axios from "axios"
 export default function Passworcreate(props) {
 
     const userdata = useSelector((state) => state.reducer)
-    console.log(userdata)
+
     const [password, setpassword] = useState("")
     const [confirmapassword, setconfirmpassword] = useState('')
     const [firstname, setFirstname] = useState('')
@@ -42,10 +42,6 @@ export default function Passworcreate(props) {
         } else {
 
         }
-
-
-
-
     }
     return (
         <View>

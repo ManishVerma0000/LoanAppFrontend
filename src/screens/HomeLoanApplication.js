@@ -1,15 +1,50 @@
 import { React, useState } from 'react';
 import { View, Text, StyleSheet, Image, Button, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import Footer from './Footer';
+import { toatalAmountfunction } from "../redux/action"
+import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux'
 
 
-export default function HomaLoanApplication() {
+export default function HomaLoanApplication(props) {
+    const dispatch = useDispatch()
+
+    const [price, setPrice] = useState("300000")
     const [isChecked, setIsChecked] = useState(false);
-
-
+    const [time, settime] = useState("2")
+    const [installements, setinstallement] = useState("8")
+    const subtractprice = () => {
+        setPrice(parseInt(price) - 10000)
+    }
+    const additionprice = () => {
+        setPrice((parseInt(price) + 10000).toString())
+    }
+    const additioninstallment = () => {
+        setinstallement((parseInt(installements) + 1).toString())
+    }
+    const subtractinstallment = () => {
+        setinstallement((parseInt(installements) - 1).toString())
+    }
+    const descresetime = () => {
+        settime((parseInt(time) - 1).toString())
+    }
+    const increasetime = () => {
+        settime((parseInt(time) + 1).toString())
+    }
     const handleCheckboxToggle = () => {
         setIsChecked(!isChecked);
     };
+
+    const toatalAmount = parseInt(price) * 9 / 1000
+    const data = {
+        data: toatalAmount * parseInt(time * 12) + parseInt(price),
+        installements: installements
+    }
+    // console.log(data)
+    dispatch(toatalAmountfunction(data))
+    const sendtototalamountpage = () => {
+        props.navigation.navigate("Amount")
+    }
 
 
     return (
@@ -27,11 +62,11 @@ export default function HomaLoanApplication() {
                                 I would Like to Borrow
                             </Text>
                         </View>
-
                         <View style={styles.twoimages}>
-
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/negative.png')} />
+                                <TouchableOpacity onPress={subtractprice}>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 50, color: "blue", marginRight: 40 }}> -</Text>
+                                </TouchableOpacity>
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
@@ -39,12 +74,19 @@ export default function HomaLoanApplication() {
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
+                                        value={price}
+                                        onChange={(text) => {
+                                            setPrice(text)
+                                        }}
                                     />
                                 </View>
-                                <View></View>
+
                             </View>
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/positive.png')} />
+                                <TouchableOpacity onPress={additionprice} >
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 30, color: "blue", marginRight: 30 }}> +</Text>
+                                </TouchableOpacity>
+
                             </View>
                         </View>
                     </View>
@@ -56,11 +98,11 @@ export default function HomaLoanApplication() {
                                 For A time Period of
                             </Text>
                         </View>
-
                         <View style={styles.twoimages}>
-
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/negative.png')} />
+                                <TouchableOpacity onPress={descresetime}>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 50, color: "blue", marginRight: 40 }}> -</Text>
+                                </TouchableOpacity>
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
@@ -68,12 +110,18 @@ export default function HomaLoanApplication() {
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
+                                        value={time}
+                                        onChange={(text) => {
+                                            settime(text)
+                                        }}
                                     />
                                 </View>
                                 <View></View>
                             </View>
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/positive.png')} />
+                                <TouchableOpacity onPress={increasetime}>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 30, color: "blue", marginRight: 30 }}> +</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -87,7 +135,9 @@ export default function HomaLoanApplication() {
                         </View>
                         <View style={styles.twoimages}>
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/negative.png')} />
+                                <TouchableOpacity onPress={subtractinstallment}>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 50, color: "blue", marginRight: 40 }}> -</Text>
+                                </TouchableOpacity>
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
@@ -95,17 +145,21 @@ export default function HomaLoanApplication() {
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
+                                        value={installements}
+                                        onChange={(text) => {
+                                            setinstallement(text)
+                                        }}
                                     />
                                 </View>
-                                <View></View>
                             </View>
                             <View style={styles.negativepng}>
-                                <Image source={require('../../assets/positive.png')} />
+                                <TouchableOpacity onPress={additioninstallment}>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 30, color: "blue", marginRight: 30 }}> +</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-
                 <View style={styles.container}>
                     <View>
                         <TouchableOpacity style={styles.checkboxContainer} onPress={handleCheckboxToggle}>
@@ -118,9 +172,8 @@ export default function HomaLoanApplication() {
                 </View>
 
                 <View style={styles.clickbutton}>
-                    <Button title='click'></Button>
+                    <Button title='click' onPress={sendtototalamountpage}></Button>
                 </View>
-
                 <View>
                     <Text style={{ marginLeft: 50, fontSize: 15 }}>
                         We are happy to inform you that we
@@ -170,10 +223,6 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
     },
-
-    // container: {
-    //     marginLeft: 20
-    // },
     checkboxContainer: {
         backgroundColor: 'transparent',
         borderWidth: 0,

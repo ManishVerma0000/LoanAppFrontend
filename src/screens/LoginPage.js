@@ -14,9 +14,13 @@ export default function Loginpage(props) {
     const registerfunction = () => {
         props.navigation.navigate("Register")
     }
+    const settothenextpage = () => {
+        props.navigation.navigate("Register")
+    }
+    const settothenextpagelogin = () => {
+        props.navigation.navigate("personaldetails")
+    }
     const functionclick = () => {
-        console.log(email)
-        console.log(password)
         const data = {
             email: email,
             password: password
@@ -26,20 +30,20 @@ export default function Loginpage(props) {
                 'Content-Type': 'application/json',
             }
         }).then((data) => {
-            console.log(data)
+            props.navigation.navigate("personaldetails")
             Toast.show({
-                type: 'success', // 'info', 'success', 'error', 'none'
+                type: 'success',
                 text1: 'login success',
-                position: 'bottom', // 'top', 'center', 'bottom'
-                visibilityTime: 2000, // Duration of the toast message in milliseconds
+                position: 'bottom',
+                visibilityTime: 2000,
             });
         }).catch((err) => {
-            console.log(err)
+
             Toast.show({
-                type: 'error', // 'info', 'success', 'error', 'none'
+                type: 'error',
                 text1: 'login not success',
-                position: 'top', // 'top', 'center', 'bottom'
-                visibilityTime: 2000, // Duration of the toast message in milliseconds
+                position: 'top',
+                visibilityTime: 2000,
             });
         })
 
@@ -49,8 +53,6 @@ export default function Loginpage(props) {
         <View>
             <Toast />
             <View style={styles.container}>
-
-
                 <View style={styles.imagecontainer}>
                     <Image source={require('../../assets/rotateImage.png')}></Image>
                 </View>
@@ -59,7 +61,7 @@ export default function Loginpage(props) {
                         <Text style={styles.textwelcome}> Welcome Back  </Text>
                         <View style={styles.textmaindiv}>
                             <Text style={styles.pleasetext}>Please</Text>
-                            <Text style={styles.login}>Login</Text>
+                            <Text style={styles.login} onPress={settothenextpagelogin}>Login</Text>
                             <Text style={styles.continue}>to continue</Text>
                         </View>
                     </View>
@@ -89,7 +91,7 @@ export default function Loginpage(props) {
 
                 </View>
                 <View style={styles.password}>
-                    <Text>Forget Password</Text>
+                    <Text onPress={settothenextpage}>Forget Password</Text>
                 </View>
                 <View style={styles.passwordbtn}>
                     <TouchableOpacity style={styles.button}>

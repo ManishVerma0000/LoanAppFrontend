@@ -47,13 +47,13 @@ const Card = () => {
                     <View style={styles.thirdsection}>
 
                         <View style={styles.container}>
-                            {/* First pair of cards */}
+
                             <View style={styles.cardRow}>
                                 <Card1 />
                                 <Card1 />
                             </View>
 
-                            {/* Second pair of cards */}
+
                             <View style={styles.cardRow}>
                                 <Card1 />
                                 <Card1 />
@@ -75,8 +75,8 @@ const Card1 = () => {
         <View style={styles.card}>
             <Image source={require('../../assets/image1.png')} style={styles.cardImage} />
             <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>Card Title</Text>
-                <Text style={styles.cardDescription}>This is the card description.</Text>
+                <Text style={styles.cardTitle}>take the Loan</Text>
+                <Text style={styles.cardDescription}>Take the Loan .</Text>
             </View>
         </View>
     );

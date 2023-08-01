@@ -1,19 +1,32 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid, DatePickerAndroid } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { Picker } from '@react-native-picker/picker';
-
-
-
-export default function PersonalDetails() {
-    const [selectedOption, setSelectedOption] = useState('Male');
-
+import axios from 'axios'
+export default function PersonalDetails(props) {
+    const [selectedOption, setSelectedOption] = useState('Select');
+    const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
+    const [Maritail, setMaritail] = useState("")
+    const [dob, setdob] = useState('')
     const options = ['Select', 'Unmarried', 'Married'];
-
     const handleChangeOption = (option) => {
         setSelectedOption(option);
     };
-
-
+    const submitdetails = () => {
+        props.navigation.navigate("Application")
+        const data = {
+            email: email,
+            name: name,
+            Maritail: Maritail,
+            dob: dob
+        }
+        axios.post('http://localhost:7000/api/personaldetails', data).then((data) => {
+            console.log(data)
+            props.navigation.navigate("Application")
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
     return (
         <View>
             <View style={styles.topcontainer}>
@@ -40,10 +53,12 @@ export default function PersonalDetails() {
                         placeholder="enter the Name"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChange={(text) => {
+
+                            setName(text)
+                        }}
                     />
                 </View>
-
-
             </View>
             <View>
 
@@ -55,14 +70,13 @@ export default function PersonalDetails() {
                         placeholder="enter the Birth"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChange={(text) => {
+                            setdob(text)
+                        }}
                     />
                 </View>
-
-
             </View>
             <View>
-
-
                 <View style={styles.emailinputtag1}>
                     <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Marital Status</Text>
                     <Picker
@@ -71,7 +85,9 @@ export default function PersonalDetails() {
                         style={styles.picker}
                     >
                         {options.map((option) => (
-                            <Picker.Item key={option} label={option} value={option} />
+                            <Picker.Item key={option} label={option} value={option} onChange={(text) => {
+                                setMaritail(text)
+                            }} />
                         ))}
                     </Picker>
 
@@ -85,6 +101,9 @@ export default function PersonalDetails() {
                         placeholder="enter the Email"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChange={(text) => {
+                            setEmail(text)
+                        }}
                     />
                 </View>
 
@@ -101,19 +120,19 @@ export default function PersonalDetails() {
                         placeholder="Enter the Phone Number"
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        onChange={(text) => {
+                            setPhone(text)
+                        }}
                     />
                 </View>
             </View>
 
             <View style={styles.passwordbtn}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={submitdetails}>
                     <Text style={styles.buttonText}
                     >Click Me</Text>
                 </TouchableOpacity>
             </View>
-
-
-
 
         </View>
     )

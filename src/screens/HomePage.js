@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native-elements';
 export default function HomePage(props) {
     const rendertothenextpage = () => {
         console.warn("hello")
+        props.navigation.navigate("Home2")
+    }
+    const settothenextpage = () => {
         props.navigation.navigate("Home2")
     }
     return (
@@ -13,7 +17,7 @@ export default function HomePage(props) {
                 <View style={styles.uppersectionpart}>
                     <Image source={require('../../assets/one.png')}></Image>
                     <View style={styles.skipsection}>
-                        <Text style={styles.textforskip}> Skip</Text>
+                        <Text style={styles.textforskip} onPress={settothenextpage}> Skip</Text>
                     </View>
                 </View>
 
@@ -45,6 +49,10 @@ export default function HomePage(props) {
                     <Image source={require("../../assets/bluenextbutton.png")}>
                     </Image>
                 </TouchableOpacity>
+            </View>
+
+            <View>
+                <Button title={"Next Page"} onPress={settothenextpage}></Button>
             </View>
         </View >
     );

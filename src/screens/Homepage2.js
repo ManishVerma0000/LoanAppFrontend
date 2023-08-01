@@ -14,7 +14,7 @@ export default function HomePage2(props) {
                 <View style={styles.uppersectionpart}>
                     <Image source={require('../../assets/one.png')}></Image>
                     <View style={styles.skipsection}>
-                        <Text style={styles.textforskip}> Skip</Text>
+                        <Text style={styles.textforskip} onPress={rightsidefunction}> Skip</Text>
                     </View>
                 </View>
 

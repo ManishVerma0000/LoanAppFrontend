@@ -10,8 +10,6 @@ export default function Otp() {
         usedetails[0].phonenumber
         setphone(usedetails[0].phonenumber)
     }, [])
-
-
     return (
         <View>
             <View style={styles.container}>
@@ -33,7 +31,6 @@ export default function Otp() {
                     </Text>
 
                 </View>
-
                 <View>
                     <Text style={{ fontSize: 23, fontWeight: "bold", margin: 10 }}> {phone}</Text>
 
@@ -80,7 +77,6 @@ export default function Otp() {
 const styles = StyleSheet.create({
     login: {
         color: "blue"
-
 
     },
     textmaindiv: {
