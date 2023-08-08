@@ -10,6 +10,10 @@ export default function Otp() {
         usedetails[0].phonenumber
         setphone(usedetails[0].phonenumber)
     }, [])
+
+    const registerfunction = () => {
+        props.navigation.navigate("Login")
+    }
     return (
         <View>
             <View style={styles.container}>
@@ -62,7 +66,7 @@ export default function Otp() {
                         <Text style={styles.innertext}>
                             Already a  Member,
                         </Text>
-                        <Text style={styles.register}> Login Now</Text>
+                        <Text style={styles.register} onPress={registerfunction}> Login Now</Text>
                     </Text>
                 </View>
             </View>

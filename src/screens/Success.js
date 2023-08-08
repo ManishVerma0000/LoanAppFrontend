@@ -4,7 +4,12 @@ import Footer from "./Footer";
 
 
 
-export default function Success() {
+export default function Success(props) {
+
+    const routetothenextpage = () => {
+        props.navigation.navigate("Upload")
+    }
+
     return (
         <View style={styles.container} >
             <View style={styles.containerfirst}>
@@ -13,7 +18,6 @@ export default function Success() {
                 </View>
 
                 <Text style={{ marginTop: 15, color: "blue", fontWeight: "bold" }}>HOME LOAN APPLICATION</Text>
-
 
                 <View>
                     <Image source={require("../../assets/next.png")}></Image>
@@ -30,7 +34,7 @@ export default function Success() {
                 </View>
             </View>
             <View style={styles.containerthird}>
-                <Button title="click Here"></Button>
+                <Button title="click Here" onPress={routetothenextpage}></Button>
             </View>
 
             <Footer />

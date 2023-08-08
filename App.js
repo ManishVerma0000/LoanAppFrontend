@@ -13,7 +13,7 @@ import Passworcreate from './src/screens/Passwordcreate';
 import Success from './src/screens/Success';
 import DocumentUpload from './src/screens/DocumnetUpload';
 import Card from './src/screens/Card';
-
+import { TotalLoan } from './src/screens/TotalLoan';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Otp from './src/screens/Otp';
@@ -26,8 +26,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="DashBoard">
-
+        <Stack.Navigator initialRouteName="TotalLoan">
+          <Stack.Screen name="TotalLoan" component={TotalLoan} />
           <Stack.Screen name="DashBoard" component={DashBoard} />
           <Stack.Screen name="Amount" component={TotalAmount} />
           <Stack.Screen name="Application" component={HomaLoanApplication} />

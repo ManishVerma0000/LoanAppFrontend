@@ -10,13 +10,14 @@ export default function DashBoard(props) {
             <View style={styles.topcontainer}>
             </View>
             <View>
-                <View style={styles.card}>
+                {/* <View style={styles.card}>
                     <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>Welcome to the loan App</Text>
-                        <Text style={styles.cardDescription}>This is the card description.</Text>
+                        
                     </View>
-                </View>
+                </View> */}
+                <Image source={require('../../assets/one.png')}></Image>
             </View>
+
             <View style={styles.bottomcontainer}>
                 <Button title='NEXT PAGE' onPress={settothenextpage}></Button>
             </View>

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Button, ScrollView, TouchableOpacity } f
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
 
-export default function TotalAmount() {
+export default function TotalAmount(props) {
     const [totalamount, setAmount] = useState('')
     const [installements, setinstallement] = useState('')
     const userdata = useSelector((state) => state.toatalAmountreducer)
@@ -41,9 +41,10 @@ export default function TotalAmount() {
                     </View>
                 </View>
                 <View style={styles.uppersectionpart}>
-                    <Image source={require('../../assets/g12.png')} style={{ height: 250, width: 200 }}></Image>
+
+                    {/* <Image source={require('../../assets/g12.png')} style={{ height: 250, width: 200 }}></Image>
                     <View style={styles.skipsection}>
-                    </View>
+                    </View> */}
                 </View>
                 <View>
                     <TouchableOpacity style={styles.button} onPress={functionnextpage}>

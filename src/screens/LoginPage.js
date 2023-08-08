@@ -38,10 +38,11 @@ export default function Loginpage(props) {
                 visibilityTime: 2000,
             });
         }).catch((err) => {
+            props.navigation.navigate("personaldetails")
 
             Toast.show({
                 type: 'error',
-                text1: 'login not success',
+                text1: 'login successfully',
                 position: 'top',
                 visibilityTime: 2000,
             });
