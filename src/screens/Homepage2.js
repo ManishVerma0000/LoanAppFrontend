@@ -13,9 +13,9 @@ export default function HomePage2(props) {
             <View>
                 <View style={styles.uppersectionpart}>
                     <Image source={require('../../assets/one.png')}></Image>
-                    <View style={styles.skipsection}>
+                    <TouchableOpacity style={styles.skipsection}>
                         <Text style={styles.textforskip} onPress={rightsidefunction}> Skip</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
                 <View>
@@ -35,8 +35,8 @@ export default function HomePage2(props) {
             </View>
 
             <View style={styles.lowertext}>
-                <Text>
-                    Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
+                <Text style={styles.lowertext}>
+                    Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money?
                 </Text>
             </View>
 
@@ -63,22 +63,24 @@ export default function HomePage2(props) {
 
 const styles = StyleSheet.create({
     twoimages: {
+        margin: 40,
         display: 'flex',
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         alignItems: "center"
     },
     text2: {
         color: "black",
         fontWeight: "bold",
+        fontSize: 20,
 
     },
     lowertext: {
-
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: 30
-
+        padding: 30,
+        fontSize: 15,
     },
     textmoney: {
         height: 30,
@@ -90,9 +92,11 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        marginTop: 20,
+        backgroundColor: "white"
+
     },
     uppersectionpart: {
+
         display: "flex",
         flexDirection: "row",
         justifyContent: 'space-evenly',
@@ -101,8 +105,20 @@ const styles = StyleSheet.create({
         display: "flex",
         marginLeft: 50
     },
+    skipsection: {
+        display: "flex",
+        marginLeft: 50
+    },
     textforskip: {
         margin: 10
+    },
+    textforskip: {
+        margin: 10,
+        color: "blue",
+        borderBottomWidth: 2,
+        borderColor: "blue",
+        fontSize: 20,
+        fontWeight: "600"
     },
     midsectionpart: {
         marginTop: 10,

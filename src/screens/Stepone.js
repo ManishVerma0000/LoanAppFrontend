@@ -28,7 +28,7 @@ export default function StepOne(props) {
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
                 <View style={styles.StepOne}>
-                    <Image source={require('../../assets/Steone.png')}></Image>
+                    <Image style={{ marginLeft: 10 }} source={require('../../assets/Steone.png')}></Image>
                 </View>
                 <View style={styles.textmaindiv}>
                     <Text style={styles.pleasetext}>
@@ -41,7 +41,7 @@ export default function StepOne(props) {
                         to continue
                     </Text>
                 </View>
-                <View>
+                <View style={{ marginLeft: 20 }}>
                     <View style={styles.emailinputtag}>
                         <Text>Full Name</Text>
                         <TextInput
@@ -52,6 +52,7 @@ export default function StepOne(props) {
                             onChangeText={(text) => {
                                 setFullname(text)
                             }}
+
                         />
                     </View>
                     <View style={styles.emailinputtag}>
@@ -153,7 +154,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     StepOne: {
-        margin: 10,
+        height: 50,
+
+
 
     },
 
@@ -171,7 +174,8 @@ const styles = StyleSheet.create({
 
     leftsideimage: {
         display: "flex",
-        flexDirection: "row-reverse"
+        flexDirection: "row-reverse",
+        transform: [{ rotate: '180deg' }]
 
     },
     textheadsection: {
@@ -218,9 +222,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     container: {
-
+        backgroundColor: "white"
         // backgroundColor: "red"
-    }, passwordbtn: {
+    },
+    passwordbtn: {
         display: "flex",
         justifyContent: 'center',
         alignItems: "center"
@@ -238,20 +243,18 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 10,
         fontSize: 16,
+        borderRadius: 10
     },
     textwelcome: {
         fontSize: 30,
         fontWeight: 'bold'
     },
     imagecontainer: {
+        height: 150,
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "flex-end",
-
-
     },
-    Image: {
 
-    }
 
 })

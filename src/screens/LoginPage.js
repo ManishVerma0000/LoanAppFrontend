@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
@@ -67,24 +67,25 @@ export default function Loginpage(props) {
                         </View>
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text>Email</Text>
+                        <Text >Email</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Enter your email"
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onChangeText={handleInputChange}
+
                         />
                     </View>
-
                     <View style={styles.inputtagofpassword}>
-                        <Text>Password</Text>
+                        <Text >Password</Text>
                         <TextInput
                             style={styles.input}
-
+                            type="password"
                             placeholder="Enter your password"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            secureTextEntry={true}
                             onChangeText={handleInputChangepassword}
                         />
 
@@ -160,12 +161,18 @@ const styles = StyleSheet.create({
     },
     emailinputtag: {
         color: "#5045E6",
-        margin: 20
+        margin: 10
+
     },
 
     leftsideimage: {
+        margin: 0,
         display: "flex",
-        flexDirection: "row-reverse"
+        height: "auto",
+        width: "auto",
+        flexDirection: "row-reverse",
+        transform: [{ rotate: '180sdeg' }],
+        backgroundColor: "white"
 
     },
     textheadsection: {
@@ -237,6 +244,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 10,
         fontSize: 16,
+        borderRadius: 10,
+        marginLeft: 10
     },
     textwelcome: {
         fontSize: 30,

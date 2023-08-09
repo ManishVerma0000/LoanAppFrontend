@@ -26,7 +26,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="TotalLoan">
+        <Stack.Navigator initialRouteName="Password">
           <Stack.Screen name="TotalLoan" component={TotalLoan} />
           <Stack.Screen name="DashBoard" component={DashBoard} />
           <Stack.Screen name="Amount" component={TotalAmount} />

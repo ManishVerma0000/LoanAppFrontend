@@ -10,35 +10,35 @@ export default function HomePage3(props) {
             <View>
                 <View style={styles.uppersectionpart}>
                     <Image source={require('../../assets/one.png')}></Image>
-                    <View style={styles.skipsection}>
+                    <TouchableOpacity style={styles.skipsection}>
                         <Text style={styles.textforskip}> Skip</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
                 <View>
                     <View style={styles.midsectionpart}>
-                        <Image source={require('../../assets/image3.png')}></Image>
-
+                        <Image source={require('../../assets/image3.png')} style={{ height: 250 }} ></Image>
                     </View>
-
                 </View>
 
             </View>
             <View style={styles.textmoney}>
-                <Text style={styles.text2}>
+                <Text style={styles.need}>
                     Loan Approval In 48 Hrs.
                 </Text>
 
             </View>
 
             <View style={styles.lowertext}>
-                <Text>
+                <Text style={{
+                    padding: 20, fontSize: 15,
+
+                }}>
                     Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
                 </Text>
             </View>
             <StatusBar style="auto" />
             <View style={styles.buttonpressme}>
-
                 < Button title='Get Started' onPress={getstarted}></Button>
 
             </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     buttonpressme: {
+        backgroundColor: "white",
 
         display: "flex",
         justifyContent: "center",
@@ -70,17 +71,22 @@ const styles = StyleSheet.create({
         padding: 30
 
     },
+    need: {
+        fontSize: 20,
+        fontWeight: "600"
+    },
     textmoney: {
         height: 30,
         justifyContent: "center",
         alignItems: "center",
         marginTop: 10,
         fontWeight: 'bold',
-        fontSize: 24
+
     },
     container: {
         flex: 1,
-        marginTop: 20,
+        backgroundColor: "white"
+
     },
     uppersectionpart: {
         display: "flex",
@@ -92,13 +98,17 @@ const styles = StyleSheet.create({
         marginLeft: 50
     },
     textforskip: {
-        margin: 10
+        color: "blue",
+        borderBottomWidth: 2,
+        borderColor: "blue",
+        fontSize: 20,
+        fontWeight: "600"
     },
     midsectionpart: {
-        marginTop: 10,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        padding: 20
 
     }
 });

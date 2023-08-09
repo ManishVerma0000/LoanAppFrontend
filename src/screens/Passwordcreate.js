@@ -19,12 +19,12 @@ export default function Passworcreate(props) {
         dispatch(passwordDetails(data))
         props.navigation.navigate("otp")
     }
-    useEffect(() => {
-        setFirstname(userdata[0].fullname)
-        setEmail(userdata[0].email)
-        setphone(userdata[0].phonenumber)
+    // useEffect(() => {
+    //     setFirstname(userdata[0].fullname)
+    //     setEmail(userdata[0].email)
+    //     setphone(userdata[0].phonenumber)
 
-    }, [])
+    // }, [])
 
     const registercomplete = () => {
         if (password == confirmapassword) {
@@ -67,7 +67,7 @@ export default function Passworcreate(props) {
 
                 <View>
                     <View style={styles.emailinputtag}>
-                        <Text>Password</Text>
+                        <Text style={{ marginLeft: 7 }}>Password</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Enter the Password"
@@ -79,7 +79,7 @@ export default function Passworcreate(props) {
                         />
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text>Confirm Password</Text>
+                        <Text style={{ marginLeft: 7 }}>Confirm Password</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Confirm Password"
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     textmaindiv: {
         flexDirection: 'row',
-        alignItems: 'center',
+        marginLeft: 10
     },
 
     pleasetext: {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     StepOne: {
-        margin: 10,
+        marginLeft: 15,
 
     },
 
@@ -172,7 +172,9 @@ const styles = StyleSheet.create({
 
     leftsideimage: {
         display: "flex",
-        flexDirection: "row-reverse"
+        flexDirection: "row-reverse",
+        marginTop: 10,
+        transform: [{ rotate: '180deg' }]
 
     },
     textheadsection: {
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
     },
     container: {
 
-        // backgroundColor: "red"
+        backgroundColor: "white"
     }, passwordbtn: {
         display: "flex",
         justifyContent: 'center',
@@ -239,6 +241,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 10,
         fontSize: 16,
+        borderRadius: 10,
+        marginLeft: 10
     },
     textwelcome: {
         fontSize: 30,
