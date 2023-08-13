@@ -20,13 +20,18 @@ import Otp from './src/screens/Otp';
 import PersonalDetails from './src/screens/PersonalDetails';
 import HomaLoanApplication from './src/screens/HomeLoanApplication';
 import TotalAmount from './src/screens/totalAmount';
+import ForgetPassword from './src/screens/ForgetPassword';
 import DashBoard from './src/screens/DashBoard';
+import Notofication from './src/screens/Notification';
 export default function App() {
   const Stack = createStackNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Password">
+
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name='Notofication' component={Notofication} />
+          <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="TotalLoan" component={TotalLoan} />
           <Stack.Screen name="DashBoard" component={DashBoard} />
           <Stack.Screen name="Amount" component={TotalAmount} />

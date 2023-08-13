@@ -9,7 +9,6 @@ export default function Success(props) {
     const routetothenextpage = () => {
         props.navigation.navigate("Upload")
     }
-
     return (
         <View style={styles.container} >
             <View style={styles.containerfirst}>
@@ -17,27 +16,37 @@ export default function Success(props) {
                     <Image source={require("../../assets/next.png")}></Image>
                 </View>
 
-                <Text style={{ marginTop: 15, color: "blue", fontWeight: "bold" }}>HOME LOAN APPLICATION</Text>
+                <Text style={{ marginTop: 15, color: "blue", fontWeight: "bold", fontSize: 18 }}>HOME LOAN APPLICATION</Text>
 
                 <View>
-                    <Image source={require("../../assets/next.png")}></Image>
+                    <Image source={require("../../assets/face.png")}></Image>
                 </View>
             </View>
             <View style={styles.containersecond}>
                 <View style={styles.innercontainer}>
-                    <Text>
-                        YOUR Application is accepted
-                        YOUR Application is accepted
-                        YOUR Application is accepted
-                        YOUR Application is accepted
-                    </Text>
+                    <View>
+                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+                            Hurray ! You Have successfully filled the form
+
+                        </Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+                            Sit back till our team completes  verification
+                        </Text>
+                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+                            You will see a notification under notification tab
+                        </Text>
+                    </View>
+
                 </View>
             </View>
             <View style={styles.containerthird}>
-                <Button title="click Here" onPress={routetothenextpage}></Button>
+                <View >
+                    <Button title="Go To Home" onPress={routetothenextpage}></Button>
+                </View>
             </View>
 
-            <Footer />
+            {/* 
+            <Footer /> */}
 
 
         </View>
@@ -49,10 +58,10 @@ export default function Success(props) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "white"
     },
     innercontainer: {
-
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -60,16 +69,11 @@ const styles = StyleSheet.create({
     },
 
     containerfirst: {
-        margin: 20,
+
         flex: 1,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between"
-
-        //  backgroundColor: "green",
-
-
-
     },
     containerfourth: {
         flex: 1,
@@ -81,11 +85,15 @@ const styles = StyleSheet.create({
         //  backgroundColor: "red"
     },
     containerthird: {
+
+
         flex: 1,
+        marginTop: 60,
         // backgroundColor: "yellow",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
+        // display: "flex",
+        // justifyContent: "center",
+        // alignItems: "center"
+        padding: 30,
     }
 
 })

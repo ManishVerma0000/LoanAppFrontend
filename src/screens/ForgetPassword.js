@@ -2,8 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
-import axios from "axios";
-export default function Loginpage(props) {
+export default function ForgetPassword(props) {
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
     const handleInputChange = (text) => {
@@ -18,26 +17,38 @@ export default function Loginpage(props) {
     const settothenextpage = () => {
         props.navigation.navigate("Register")
     }
-    const forgetpassword = () => {
-        props.navigation.navigate("ForgetPassword")
-    }
     const settothenextpagelogin = () => {
         props.navigation.navigate("personaldetails")
     }
-    const functionclick = async () => {
-        try {
-            const data = {
-                email: email,
-                password: password
-            }
-            console.log(data)
-
-            const response = await axios.post("https://localhost:7000/api/login", { data: data })
-            console.warn(response)
-            // props.navigation.navigate("personaldetails")
-        } catch (error) {
-            console.log(error.message)
+    const functionclick = () => {
+        const data = {
+            email: email,
+            password: password
         }
+        api.post("/login", data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then((data) => {
+            props.navigation.navigate("personaldetails")
+            Toast.show({
+                type: 'success',
+                text1: 'login success',
+                position: 'bottom',
+                visibilityTime: 2000,
+            });
+        }).catch((err) => {
+            props.navigation.navigate("personaldetails")
+
+            Toast.show({
+                type: 'error',
+                text1: 'login successfully',
+                position: 'top',
+                visibilityTime: 2000,
+            });
+        })
+
+
     }
     return (
         <View>
@@ -51,15 +62,15 @@ export default function Loginpage(props) {
                         <Text style={styles.textwelcome}> Welcome Back  </Text>
                         <View style={styles.textmaindiv}>
                             <Text style={styles.pleasetext}>Please</Text>
-                            <Text style={styles.login} onPress={settothenextpagelogin}>Login</Text>
+                            <Text style={styles.login} onPress={settothenextpagelogin}>Enter New Password</Text>
                             <Text style={styles.continue}>to continue</Text>
                         </View>
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text style={{ marginLeft: 10, fontSize: 17, fontWeight: "700" }}>Email</Text>
+                        <Text style={{ fontSize: 17, fontWeight: "700", marginLeft: 10 }} >Email</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Enter your email"
+                            placeholder="Enter your password"
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onChangeText={handleInputChange}
@@ -67,11 +78,11 @@ export default function Loginpage(props) {
                         />
                     </View>
                     <View style={styles.inputtagofpassword}>
-                        <Text style={{ marginLeft: 10, fontSize: 17, fontWeight: "700" }} >Password</Text>
+                        <Text style={{ fontSize: 17, fontWeight: "700", marginLeft: 10 }} >Password</Text>
                         <TextInput
                             style={styles.input}
                             type="password"
-                            placeholder="Enter your password"
+                            placeholder="confirm your new password"
                             keyboardType="email-address"
                             autoCapitalize="none"
                             secureTextEntry={true}
@@ -81,13 +92,11 @@ export default function Loginpage(props) {
                     </View>
 
                 </View>
-                <View style={styles.password}>
-                    <Text onPress={forgetpassword} style={{ marginBottom: 10 }}>Forget Password</Text>
-                </View>
+
                 <View style={styles.passwordbtn}>
-                    <TouchableOpacity style={styles.button} onPress={functionclick
-                    }>
-                        <Text style={styles.buttonText} >Click Me</Text>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText} onPress={functionclick
+                        }>Submit</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>
@@ -175,8 +184,7 @@ const styles = StyleSheet.create({
         color: "#5F5F5F"
     },
     register: {
-        color: "#5045E6",
-        fontSize: 17, fontWeight: "700", marginLeft: 10
+        color: "#5045E6", fontSize: 17, fontWeight: "700", marginTop: 10, marginLeft: 20
 
     },
     imagefont: {
@@ -201,10 +209,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         borderRadius: 12,
-        width: 300,
+        width: 281,
         height: 45,
         backgroundColor: "#5045E6",
-
+        margin: 10
 
     },
     buttonText: {
@@ -217,17 +225,13 @@ const styles = StyleSheet.create({
         // backgroundColor: "red"
     }, passwordbtn: {
         display: "flex",
-        // justifyContent: 'center',
-        alignItems: "center",
-        marginRight: 10
-
+        justifyContent: 'center',
+        alignItems: "center"
     },
     password: {
         display: "flex",
         justifyContent: "flex-end",
-        alignItems: "center",
-
-
+        alignItems: "center"
     },
 
     input: {

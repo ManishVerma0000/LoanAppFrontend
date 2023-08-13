@@ -11,7 +11,7 @@ export default function HomePage3(props) {
                 <View style={styles.uppersectionpart}>
                     <Image source={require('../../assets/one.png')}></Image>
                     <TouchableOpacity style={styles.skipsection}>
-                        <Text style={styles.textforskip}> Skip</Text>
+                        <Text style={styles.textforskip} onPress={getstarted}> Skip</Text>
                     </TouchableOpacity>
                 </View>
 

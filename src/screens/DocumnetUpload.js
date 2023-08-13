@@ -16,12 +16,16 @@ export default function DocumentUpload() {
     const [address, setaddress] = useState('');
     const [fileuriforAddhar, setfileUriForAddhar] = useState(null);
     const [employment, setEmployementinformation] = useState('');
+    const [form16name, setForm16name] = useState('')
+    const [addharname, setAadharname] = useState("")
+    const [panCard, setPancardName] = useState()
 
     const pickDocumentforForm16 = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({});
             if (result.type === "success") {
-                console.log(result);
+                console.log(result.name);
+                setForm16name(result.name)
                 setFileUriForForm16(result);
             } else {
                 console.log("Document picker was canceled.");
@@ -36,6 +40,7 @@ export default function DocumentUpload() {
             const result = await DocumentPicker.getDocumentAsync({});
             if (result.type === "success") {
                 console.log(result);
+                setPancardName(result.name)
                 setFileUriForPanCard(result);
             } else {
                 console.log("Document picker was canceled.");
@@ -50,6 +55,7 @@ export default function DocumentUpload() {
             const result = await DocumentPicker.getDocumentAsync({});
             if (result.type === "success") {
                 console.log(result);
+                setAadharname(result.name)
                 setfileUriForAddhar(result);
             } else {
                 console.log("Document picker was canceled.");
@@ -97,7 +103,7 @@ export default function DocumentUpload() {
         <View>
             <View style={styles.topcontainer}>
                 <Image style={styles.Imagestyle} source={require("../../assets/next.png")}></Image>
-                <Text style={{ fontWeight: "bold" }}>Home Loan Application </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 18 }}>Home Loan Application </Text>
                 <Image style={styles.Imagestyle} source={require("../../assets/g10.png")}></Image>
             </View>
 
@@ -150,11 +156,16 @@ export default function DocumentUpload() {
                     <TouchableOpacity onPress={pickDocumentforAdddhar} >
                         <Text>Select File</Text>
                     </TouchableOpacity>
-                    {/* {fileUri && <Text>Selected File: {fileUri}</Text>} */}
+
                 </View>
+                {
+                    addharname ? <Text style={{
+                        color: "blue", marginTop: 20, fontSize: 16,
+                        fontWeight: 'bold',
+                    }}>{addharname}</Text> : null
+                }
+
             </View>
-
-
             <Text style={{ marginLeft: 30, marginBottom: 10, color: "black", fontWeight: "600" }}>Uplaod Pan Card</Text>
             <View style={styles.emailinputtag1}>
 
@@ -163,8 +174,13 @@ export default function DocumentUpload() {
                         <Text>Select File</Text>
                     </TouchableOpacity>
 
-                    {/* {fileUri && <Text>Selected File: {fileUri}</Text>} */}
                 </View>
+                {
+                    panCard ? <Text style={{
+                        color: "blue", marginTop: 20, fontSize: 16,
+                        fontWeight: 'bold',
+                    }}>{panCard}</Text> : null
+                }
             </View>
 
             <Text style={{ marginLeft: 30, marginBottom: 10, color: "black", fontWeight: "600" }}>Uplaod FORM 16</Text>
@@ -176,8 +192,15 @@ export default function DocumentUpload() {
                     </TouchableOpacity>
                     {/* {fileUri && <Text>Selected File: {fixleUri}</Text>} */}
                 </View>
-            </View>
+                {
+                    form16name ? <Text style={{
+                        color: "blue", marginTop: 20, fontSize: 16,
+                        fontWeight: 'bold',
+                    }}>{form16name}</Text> : null
+                }
 
+            </View>
+            {/* //form16name */}
             <View style={styles.passwordbtn}>
                 <TouchableOpacity style={styles.button} onPress={uplaoddocument}>
                     <Text style={styles.buttonText}
@@ -241,6 +264,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 10,
         fontSize: 16,
+        borderRadius: 10
     },
     topcontainer: {
         display: "flex",
@@ -251,7 +275,9 @@ const styles = StyleSheet.create({
     },
     PersonalDetails: {
         color: "blue",
-        margin: 10
+        margin: 10,
+        fontSize: 17,
+        fontWeight: "bold"
     },
     emailinputtag: {
         color: "#5045E6",

@@ -43,7 +43,7 @@ export default function StepOne(props) {
                 </View>
                 <View style={{ marginLeft: 20 }}>
                     <View style={styles.emailinputtag}>
-                        <Text>Full Name</Text>
+                        <Text style={{ fontSize: 17, fontWeight: "700" }}>Full Name</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Enter the name"
@@ -56,7 +56,7 @@ export default function StepOne(props) {
                         />
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text>Email</Text>
+                        <Text style={{ fontSize: 17, fontWeight: "700" }}>Email</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="user@gmail.com"
@@ -68,7 +68,7 @@ export default function StepOne(props) {
                         />
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text>Phone Number</Text>
+                        <Text style={{ fontSize: 17, fontWeight: "700" }}>Phone Number</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="+91"
@@ -189,7 +189,8 @@ const styles = StyleSheet.create({
         color: "#5F5F5F"
     },
     register: {
-        color: "#5045E6"
+        color: "#5045E6",
+        fontSize: 17, fontWeight: "700", marginLeft: 10
 
     },
     imagefont: {
