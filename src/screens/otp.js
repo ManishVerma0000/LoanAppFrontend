@@ -7,8 +7,8 @@ export default function Otp() {
     const passworddetailsdata = useSelector((state) => state.passwoprdreducer)
     const usedetails = useSelector((state) => state.reducer)
     useEffect(() => {
-        usedetails[0].phonenumber
-        setphone(usedetails[0].phonenumber)
+        // usedetails[0].phonenumber
+        setphone('+91 9671902964')
     }, [])
 
     const registerfunction = () => {
@@ -21,7 +21,7 @@ export default function Otp() {
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
                 <View style={styles.StepOne}>
-                    <Image source={require('../../assets/Steone.png')}></Image>
+                    <Image source={require('../../assets/step3.png')}></Image>
                 </View>
                 <View style={styles.textmaindiv}>
                     <Text style={styles.pleasetext}>
@@ -33,13 +33,21 @@ export default function Otp() {
                     <Text style={styles.continue}>
                         your mobile
                     </Text>
-
                 </View>
                 <View>
-                    <Text style={{ fontSize: 23, fontWeight: "bold", margin: 10 }}> {phone}</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+
+
+                        <Text style={{ fontSize: 23, fontWeight: 'bold', marginLeft: 30 }}> {phone}</Text>
+                        <TouchableOpacity>
+                            <Image source={require("../../assets/edit.png")} style={{ margin: 20 }} />
+                        </TouchableOpacity>
+
+                    </View>
 
                     <View style={styles.emailinputtag}>
-                        <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Enter the Otp</Text>
+                        <Text style={{ marginBottom: 10, color: "black", fontWeight: "900", fontSize: 17 }}>Enter the Otp</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="enter the otp"
@@ -53,7 +61,7 @@ export default function Otp() {
 
                 <View style={styles.passwordbtn}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Click Me</Text>
+                        <Text style={styles.buttonText}>Submit OTP</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imagefont}>
@@ -86,6 +94,7 @@ const styles = StyleSheet.create({
     textmaindiv: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 30
     },
 
     pleasetext: {
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     StepOne: {
-        margin: 10,
+        marginLeft: 40,
 
     },
 
@@ -118,7 +127,8 @@ const styles = StyleSheet.create({
     },
     emailinputtag: {
         color: "#5045E6",
-        margin: 10
+        margin: 10,
+        marginLeft: 30
     },
 
     leftsideimage: {
@@ -134,10 +144,12 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
     innertext: {
-        color: "#5F5F5F"
+        color: "#5F5F5F",
+        fontSize: 17, fontWeight: 'bold', marginLeft: 30
     },
     register: {
-        color: "#5045E6"
+        color: "#5045E6",
+        fontSize: 17, fontWeight: 'bold', marginLeft: 30
 
     },
     imagefont: {
@@ -151,7 +163,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 16,
 
-
     },
     button: {
         display: "flex",
@@ -159,10 +170,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         borderRadius: 12,
-        width: 281,
+        width: 230,
         height: 45,
         backgroundColor: "#5045E6",
-        margin: 10
+        margin: 10,
+        marginRight: 30
     },
     buttonText: {
         color: 'black',
@@ -172,7 +184,8 @@ const styles = StyleSheet.create({
     container: {
 
         // backgroundColor: "red"
-    }, passwordbtn: {
+    },
+    passwordbtn: {
         display: "flex",
         justifyContent: 'center',
         alignItems: "center"
@@ -187,9 +200,10 @@ const styles = StyleSheet.create({
         width: 300,
         height: 40,
         borderColor: 'gray',
-        borderWidth: 1,
+        borderWidth: 2,
         paddingHorizontal: 10,
         fontSize: 16,
+        borderRadius: 10
     },
     textwelcome: {
         fontSize: 30,

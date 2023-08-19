@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "reac
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
 export default function ForgetPassword(props) {
+
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
     const handleInputChange = (text) => {
@@ -39,7 +40,6 @@ export default function ForgetPassword(props) {
             });
         }).catch((err) => {
             props.navigation.navigate("personaldetails")
-
             Toast.show({
                 type: 'error',
                 text1: 'login successfully',
@@ -47,7 +47,6 @@ export default function ForgetPassword(props) {
                 visibilityTime: 2000,
             });
         })
-
 
     }
     return (

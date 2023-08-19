@@ -3,10 +3,19 @@ import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView 
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
 import { passwordDetails } from "../redux/action";
+import Toast from 'react-native-toast-message';
 import axios from "axios"
 export default function Passworcreate(props) {
-
+    const dispatch = useDispatch()
     const userdata = useSelector((state) => state.reducer)
+
+    useEffect(() => {
+
+
+        setEmail(userdata[0].email)
+        setphone(userdata[0].phonenumber)
+        setFirstname(userdata[0].fullname)
+    }, [])
 
     const [password, setpassword] = useState("")
     const [confirmapassword, setconfirmpassword] = useState('')
@@ -14,17 +23,13 @@ export default function Passworcreate(props) {
     const [phone, setphone] = useState('')
     const [email, setEmail] = useState('')
 
-    const dispatch = useDispatch()
+
+
     const nextpageotp = (data) => {
         dispatch(passwordDetails(data))
-        props.navigation.navigate("otp")
-    }
-    // useEffect(() => {
-    //     setFirstname(userdata[0].fullname)
-    //     setEmail(userdata[0].email)
-    //     setphone(userdata[0].phonenumber)
 
-    // }, [])
+    }
+
 
     const registercomplete = () => {
         if (password == confirmapassword) {
@@ -34,10 +39,22 @@ export default function Passworcreate(props) {
                 phone: phone,
                 password: password
             }
-            axios.post("http://localhost:7000/api/signup", data).then((data) => {
+            axios.post("http://192.168.197.169:7000/api/signup", data).then((data) => {
+                Toast.show({
+                    type: 'success',
+                    text1: 'Details are saved successfully',
+
+                });
+                props.navigation.navigate("otp")
                 console.log(data)
             }).catch((err) => {
                 console.log(err)
+                Toast.show({
+                    type: 'error',
+                    text1: 'User is Already exist',
+
+                });
+                props.navigation.navigate("Register")
             })
         } else {
 
@@ -45,6 +62,7 @@ export default function Passworcreate(props) {
     }
     return (
         <View>
+            <Toast />
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>

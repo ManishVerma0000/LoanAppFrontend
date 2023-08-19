@@ -16,7 +16,6 @@ export default function StepOne(props) {
     }
 
     const addthevalue = (data) => {
-        console.warn(data)
         dispatch(steponedetails(data))
         props.navigation.navigate("Password")
 

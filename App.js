@@ -29,7 +29,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
 
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Upload">
           <Stack.Screen name='Notofication' component={Notofication} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="TotalLoan" component={TotalLoan} />

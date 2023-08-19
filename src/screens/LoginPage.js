@@ -30,13 +30,33 @@ export default function Loginpage(props) {
                 email: email,
                 password: password
             }
-            console.log(data)
+            console.warn(data)
+            await axios.post("http://192.168.197.169:7000/api/login", data, {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            }).then((data) => {
+                Toast.show({
+                    type: 'success',
+                    text1: 'Login Success'
+                });
+                settothenextpagelogin()
 
-            const response = await axios.post("https://localhost:7000/api/login", { data: data })
-            console.warn(response)
-            // props.navigation.navigate("personaldetails")
+            }).catch((err) => {
+                console.log(err)
+                console.log('inside the error part')
+                Toast.show({
+                    type: 'error',
+                    text1: 'please login again',
+
+                });
+                props.navigation.navigate("Login")
+            })
+
+
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
     return (

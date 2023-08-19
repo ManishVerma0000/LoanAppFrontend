@@ -58,7 +58,7 @@ export default function HomaLoanApplication(props) {
                 <View style={styles.containersecond}>
                     <View>
                         <View>
-                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold" }}>
+                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold", fontSize: 17 }}>
                                 I would Like to Borrow
                             </Text>
                         </View>
@@ -70,7 +70,7 @@ export default function HomaLoanApplication(props) {
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
-                                    <Image source={require('../../assets/rupees.png')} />
+                                    <Image source={require('../../assets/rupees.png')} style={{ margin: 10 }} />
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -84,7 +84,7 @@ export default function HomaLoanApplication(props) {
                             </View>
                             <View style={styles.negativepng}>
                                 <TouchableOpacity onPress={additionprice} >
-                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 30, color: "blue", marginRight: 30 }}> +</Text>
+                                    <Text style={{ width: 40, fontWeight: "bold", fontSize: 30, color: "blue", marginRight: 40 }}> +</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -94,7 +94,7 @@ export default function HomaLoanApplication(props) {
                 <View style={styles.containersecond}>
                     <View>
                         <View>
-                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold" }}>
+                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold", fontSize: 17 }}>
                                 For A time Period of
                             </Text>
                         </View>
@@ -106,7 +106,7 @@ export default function HomaLoanApplication(props) {
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
-                                    <Image source={require('../../assets/Timer.png')} />
+                                    <Image source={require('../../assets/Timer.png')} style={{ margin: 10 }} />
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -129,7 +129,7 @@ export default function HomaLoanApplication(props) {
                 <View style={styles.containersecond}>
                     <View>
                         <View>
-                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold" }}>
+                            <Text style={{ color: "black", marginLeft: 10, fontWeight: "bold", fontSize: 17 }}>
                                 no. of installements
                             </Text>
                         </View>
@@ -141,7 +141,7 @@ export default function HomaLoanApplication(props) {
                             </View>
                             <View>
                                 <View style={styles.ruppestag}>
-                                    <Image source={require('../../assets/Hash.png')} />
+                                    <Image source={require('../../assets/Hash.png')} style={{ margin: 10 }} />
                                     <TextInput
                                         style={styles.input}
                                         underlineColorAndroid="transparent"
@@ -163,7 +163,10 @@ export default function HomaLoanApplication(props) {
                 <View style={styles.container}>
                     <View>
                         <TouchableOpacity style={styles.checkboxContainer} onPress={handleCheckboxToggle}>
-                            <View style={[styles.checkbox, isChecked ? styles.checked : styles.unchecked]} />
+                            {
+                                isChecked ? <Image source={require("../../assets/Vector.png")} style={{ marginRight: 10 }}></Image> : <Image source={require("../../assets/Vector.png")} style={{ backgroundColor: "darkblue", overflow: "hidden", marginRight: 10 }}></Image>
+                            }
+                            {/* <View style={[styles.checkbox, isChecked ? <Image></Image> : styles.unchecked]} /> */}
                         </TouchableOpacity>
                     </View>
                     <View>
@@ -255,12 +258,14 @@ const styles = StyleSheet.create({
     ruppestag: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center"
+        // justifyContent: "center",
+        alignItems: "center",
+
     },
     textapplication: {
         color: "blue",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 17
     },
     containersecond: {
 

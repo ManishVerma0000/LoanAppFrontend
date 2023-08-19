@@ -2,33 +2,53 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios'
+import Toast from 'react-native-toast-message';
 export default function PersonalDetails(props) {
     const [selectedOption, setSelectedOption] = useState('Select');
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
+    const [phone, setPhone] = useState('')
     const [Maritail, setMaritail] = useState("")
-    const [dob, setdob] = useState('')
     const options = ['Select', 'Unmarried', 'Married'];
-    const handleChangeOption = (option) => {
-        setSelectedOption(option);
+    const [selectedValue, setSelectedValue] = useState(options[0]);
+
+    const [dob, setdob] = useState('')
+
+    const handlePickerChange = (itemValue, itemIndex) => {
+        setSelectedValue(itemValue);
+        setMaritail(selectedValue)
+
     };
-    const submitdetails = () => {
-        props.navigation.navigate("Application")
+    const submitdetails = async () => {
         const data = {
-            email: email,
-            name: name,
-            Maritail: Maritail,
-            dob: dob
+            Email: email,
+            Name: name,
+            MaritialStatus: Maritail,
+            DOB: dob,
+            PhoneNumber: phone
         }
-        axios.post('http://localhost:7000/api/personaldetails', data).then((data) => {
-            console.log(data)
-            props.navigation.navigate("Application")
+        await axios.post('http://192.168.197.169:7000/api/personaldetails', data, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((data) => {
+
+            Toast.show({
+                type: 'success',
+                text1: 'Details saved successfullly'
+            });
         }).catch((err) => {
-            console.log(err)
+            Toast.show({
+                type: 'error',
+                text1: 'error occurs',
+
+            });
         })
     }
     return (
         <View>
+            <Toast />
             <View style={styles.topcontainer}>
                 <Image style={styles.Imagestyle} source={require("../../assets/next.png")}></Image>
                 <Text style={{ fontWeight: "bold", fontSize: 17 }}>Home Loan Application </Text>
@@ -50,7 +70,7 @@ export default function PersonalDetails(props) {
                         placeholder="enter the Name"
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChange={(text) => {
+                        onChangeText={(text) => {
 
                             setName(text)
                         }}
@@ -65,7 +85,7 @@ export default function PersonalDetails(props) {
                         placeholder="enter the Birth"
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChange={(text) => {
+                        onChangeText={(text) => {
                             setdob(text)
                         }}
                     />
@@ -76,12 +96,13 @@ export default function PersonalDetails(props) {
                 <View style={styles.emailinputtag1}>
                     <Picker
                         selectedValue={selectedOption}
-                        onValueChange={handleChangeOption}
+                        onValueChange={handlePickerChange}
                         style={styles.pickerdiv}
                     >
                         {options.map((option) => (
                             <Picker.Item key={option} label={option} value={option} onChange={(text) => {
-                                setMaritail(text)
+                                console.log(text)
+                                // setMaritail(text)
                             }} />
                         ))}
                     </Picker>
@@ -95,7 +116,7 @@ export default function PersonalDetails(props) {
                         placeholder="enter the Email"
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChange={(text) => {
+                        onChangeText={(text) => {
                             setEmail(text)
                         }}
                     />
@@ -114,7 +135,8 @@ export default function PersonalDetails(props) {
                         placeholder="Enter the Phone Number"
                         keyboardType="email-address"
                         autoCapitalize="none"
-                        onChange={(text) => {
+                        onChangeText={(text) => {
+
                             setPhone(text)
                         }}
                     />

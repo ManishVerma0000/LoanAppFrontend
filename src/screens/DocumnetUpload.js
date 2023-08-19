@@ -2,116 +2,147 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid, DatePickerAndroid } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 // import DocumentPicker from 'react-native-document-picker';
+
 import * as DocumentPicker from 'expo-document-picker';
 import Toast from 'react-native-toast-message';
 import Footer from "./Footer";
 import axios from "axios";
 
 export default function DocumentUpload() {
+    const formData = new FormData()
 
-    const formData = new FormData();
-
-    const [fileurifor16, setFileUriForForm16] = useState(null);
-    const [panccard, setFileUriForPanCard] = useState(null);
+    const [fileurifor16, setFileUriForForm16] = useState({
+        uri: "",
+        type: "",
+        name: ""
+    });
+    const [panccard, setFileUriForPanCard] = useState({
+        uri: "",
+        type: "",
+        name: ""
+    });
     const [address, setaddress] = useState('');
-    const [fileuriforAddhar, setfileUriForAddhar] = useState(null);
+    const [fileuriforAddhar, setfileUriForAddhar] = useState({
+        uri: "",
+        type: "",
+        name: ""
+    });
     const [employment, setEmployementinformation] = useState('');
     const [form16name, setForm16name] = useState('')
     const [addharname, setAadharname] = useState("")
     const [panCard, setPancardName] = useState()
 
+
+
+
+
     const pickDocumentforForm16 = async () => {
+
         try {
+
             const result = await DocumentPicker.getDocumentAsync({});
-            if (result.type === "success") {
-                console.log(result.name);
-                setForm16name(result.name)
-                setFileUriForForm16(result);
-            } else {
-                console.log("Document picker was canceled.");
+            console.log(result.type)
+            if (result.type = "success") {
+                console.log('hey')
+                console.log(result)
+                setFileUriForForm16(result)
             }
-        } catch (err) {
-            console.log("Error while picking document:", err);
+        } catch (error) {
+            console.log("error occurs")
         }
+
     }
 
     const pickDocumentforpancard = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({});
-            if (result.type === "success") {
-                console.log(result);
-                setPancardName(result.name)
-                setFileUriForPanCard(result);
-            } else {
-                console.log("Document picker was canceled.");
+            console.log(result.type)
+            if (result.type = "success") {
+                console.log('hey')
+                console.log(result)
+                setFileUriForPanCard(result)
             }
-        } catch (err) {
-            console.log("Error while picking document:", err);
+        } catch (error) {
+            console.log("error occurs")
         }
+
     }
 
     const pickDocumentforAdddhar = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({});
-            if (result.type === "success") {
-                console.log(result);
-                setAadharname(result.name)
-                setfileUriForAddhar(result);
-            } else {
-                console.log("Document picker was canceled.");
+            console.log(result.type)
+            if (result.type = "success") {
+                console.log('hey')
+                console.log(result)
+                setfileUriForAddhar(result)
             }
-        } catch (err) {
-            console.log("Error while picking document:", err);
+        } catch (error) {
+            console.log("occurs occurs")
         }
     };
 
-    const uplaoddocument = () => {
-        formData.set("panCard", panccard.file);
-        formData.set("aadharCard", fileuriforAddhar.file);
-        formData.set('form16', fileurifor16.file);
-        formData.append("Address", address);
-        formData.append("information", employment);
-        axios.post("http://localhost:7000/api/document", formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-            .then((data) => {
-                console.log(data);
+    const uplaoddocument = async () => {
+
+        if (fileuriforAddhar) {
+            formData.append("Address", address)
+            formData.append("information", employment)
+
+            formData.append('aadharCard', {
+                uri: fileuriforAddhar.uri,
+                type: fileuriforAddhar.mimeType,
+                name: fileuriforAddhar.name,
+            });
+            formData.append("form16", {
+                uri: fileurifor16.uri,
+                type: fileurifor16.mimeType,
+                name: fileurifor16.name,
+            })
+
+            formData.append("panCard", {
+                uri: panccard.uri,
+                type: panccard.mimeType,
+                name: panccard.name,
+            })
+            await axios.post("http://192.168.197.169:7000/api/document", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((result) => {
+
+
                 Toast.show({
                     type: 'success',
                     text1: 'Uploaded success',
-                    position: 'bottom',
-                    visibilityTime: 2000,
-                });
-
-
-            })
-            .catch((err) => {
-                console.log(err);
-                Toast.show({
-                    type: 'error',
-                    text1: 'login not success',
                     position: 'top',
                     visibilityTime: 2000,
                 });
-            });
+
+            }).catch((err) => {
+
+
+                Toast.show({
+                    type: 'error',
+                    text1: 'Uploaded failed',
+                    position: 'top',
+                    visibilityTime: 2000,
+                });
+
+            })
+        }
     }
-
-
     return (
         <View>
+            <Toast />
             <View style={styles.topcontainer}>
                 <Image style={styles.Imagestyle} source={require("../../assets/next.png")}></Image>
                 <Text style={{ fontWeight: "bold", fontSize: 18 }}>Home Loan Application </Text>
                 <Image style={styles.Imagestyle} source={require("../../assets/g10.png")}></Image>
             </View>
-
             <View >
                 <Text style={styles.PersonalDetails}>
                     Documentation
                 </Text>
-
             </View>
             <View>
                 <View style={styles.emailinputtag}>
@@ -126,12 +157,8 @@ export default function DocumentUpload() {
                         }}
                     />
                 </View>
-
-
             </View>
             <View>
-
-
                 <View style={styles.emailinputtag}>
                     <Text style={{ marginBottom: 10, color: "black", fontWeight: "600" }}>Employment Information</Text>
                     <TextInput
@@ -144,7 +171,6 @@ export default function DocumentUpload() {
                         }}
                     />
                 </View>
-
 
             </View>
             <View>
@@ -202,7 +228,9 @@ export default function DocumentUpload() {
             </View>
             {/* //form16name */}
             <View style={styles.passwordbtn}>
-                <TouchableOpacity style={styles.button} onPress={uplaoddocument}>
+                <TouchableOpacity style={styles.button} onPress={() => {
+                    uplaoddocument(formData)
+                }}>
                     <Text style={styles.buttonText}
                     >Click Me</Text>
                 </TouchableOpacity>
