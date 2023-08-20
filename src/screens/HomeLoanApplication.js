@@ -4,12 +4,13 @@ import Footer from './Footer';
 import { toatalAmountfunction } from "../redux/action"
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
+import axios from 'axios';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 
 export default function HomaLoanApplication(props) {
     const dispatch = useDispatch()
-
-    const [price, setPrice] = useState("300000")
+    const [price, setPrice] = useState("5000000")
     const [isChecked, setIsChecked] = useState(false);
     const [time, settime] = useState("2")
     const [installements, setinstallement] = useState("8")
@@ -34,21 +35,44 @@ export default function HomaLoanApplication(props) {
     const handleCheckboxToggle = () => {
         setIsChecked(!isChecked);
     };
-
-    const toatalAmount = parseInt(price) * 9 / 1000
+    // const toatalAmount = parseInt(price) * 9 / 1000
     const data = {
-        data: toatalAmount * parseInt(time * 12) + parseInt(price),
-        installements: installements
+        installements: installements,
+        time: time,
+        email: "manishverma88180@gmail.com",
+        price: price
+
     }
-    // console.log(data)
-    dispatch(toatalAmountfunction(data))
+    //personaldetails
+
     const sendtototalamountpage = () => {
-        props.navigation.navigate("Amount")
+        axios.post("http://192.168.197.169:7000/api/totalloan", data, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((result) => {
+            Toast.show({
+                type: 'success',
+                text1: 'your application has been submitted'
+            });
+            props.navigation.navigate("personaldetails")
+
+        }).catch((err) => {
+            Toast.show({
+                type: 'error',
+                text1: 'please enter the details carefully'
+            });
+            props.navigation.navigate("Application")
+
+        })
+
     }
 
 
     return (
         <ScrollView>
+            <Toast />
             <View style={{ backgroundColor: "white" }}>
                 <View style={styles.topcontainer}>
                     <Image source={require('../../assets/leftarrow.png')}></Image>
@@ -186,7 +210,7 @@ export default function HomaLoanApplication(props) {
                     </Text>
                 </View>
             </View >
-            <Footer style={{ marginTop: 20 }} />
+
         </ScrollView>
     )
 }

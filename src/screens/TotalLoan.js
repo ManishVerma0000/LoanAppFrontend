@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from "react-native";
-import Footer from "./Footer";
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 
 
 
-export function TotalLoan() {
+export function TotalLoan(props) {
+    const sendtothenextpage = () => {
+        props.navigation.navigate("Application")
+    }
+
     return (
         <ScrollView style={{ backgroundColor: "white" }}>
             <View style={styles.topimage} >
@@ -24,7 +27,9 @@ export function TotalLoan() {
                 </Text>
             </View>
             <View style={styles.apply}>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity style={styles.btn} onPress={() => {
+                    sendtothenextpage()
+                }}>
                     <Text style={styles.applynow} >Apply Now</Text>
                 </TouchableOpacity>
             </View>
@@ -39,8 +44,10 @@ export function TotalLoan() {
                         <Text>your home</Text>
                         <Text>through</Text>
                         <Text>financing</Text>
-                        <TouchableOpacity style={styles.applyButton}>
-                            <Text style={styles.applyButtonText}>Apply now</Text>
+                        <TouchableOpacity style={styles.applyButton} onPress={() => {
+                            sendtothenextpage()
+                        }} >
+                            <Text style={styles.applyButtonText}   >Apply now</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -53,28 +60,32 @@ export function TotalLoan() {
             </View>
 
             <View style={styles.container}>
-                <View style={styles.card}>
+                <View style={styles.card} >
                     <Image
-                        source={require('../../assets/image1.png')} // Replace with your image source
+                        source={require('../../assets/image1.png')}
                         style={styles.image}
                         resizeMode="cover"
                     />
                     <View styles={styles.upto}>
                         <Text style={{ fontWeight: "900" }}>Home Loan</Text>
-                        <Text>Up to <Text style={{ color: "darkblue" }}>20 lakhs</Text> </Text>
+                        <Text>Up to <Text style={{ color: "darkblue" }} onPress={() => {
+                            sendtothenextpage()
+                        }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
 
                 </View>
-                <View style={styles.card}>
+                <View style={styles.card} >
                     <Image
-                        source={require('../../assets/image8.png')} // Replace with your image source
+                        source={require('../../assets/image8.png')}
                         style={styles.image}
                         resizeMode="cover"
                     />
-                    <View styles={styles.upto}>
+                    <View styles={styles.upto}    >
                         <Text style={{ fontWeight: "900" }}>Student Loan</Text>
-                        <Text>Up to <Text style={{ color: "darkblue" }}>20 lakhs</Text> </Text>
+                        <Text>Up to <Text style={{ color: "darkblue" }} onPress={() => {
+                            sendtothenextpage()
+                        }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
 
@@ -83,7 +94,7 @@ export function TotalLoan() {
             </View>
 
             <View style={styles.container}>
-                <View style={styles.card}>
+                <View style={styles.card} >
                     <Image
                         source={require('../../assets/image1.png')}
                         style={styles.image}
@@ -91,12 +102,13 @@ export function TotalLoan() {
                     />
                     <View styles={styles.upto}>
                         <Text style={{ fontWeight: "900" }}>Home Loan</Text>
-                        <Text>Up to <Text style={{ color: "darkblue" }}>20 lakhs</Text> </Text>
+                        <Text>Up to <Text style={{ color: "darkblue" }} onPress={() => {
+                            sendtothenextpage()
+                        }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
-
                 </View>
-                <View style={styles.card}>
+                <View style={styles.card} >
                     <Image
                         source={require('../../assets/image8.png')}
                         style={styles.image}
@@ -104,7 +116,9 @@ export function TotalLoan() {
                     />
                     <View styles={styles.upto}>
                         <Text style={{ fontWeight: "900" }}>Car Loan</Text>
-                        <Text>Up to <Text style={{ color: "darkblue" }}>20 lakhs</Text> </Text>
+                        <Text>Up to <Text style={{ color: "blue", fontWeight: "700" }} onPress={() => {
+                            sendtothenextpage()
+                        }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
 
@@ -116,8 +130,6 @@ export function TotalLoan() {
 }
 
 const styles = StyleSheet.create({
-
-
     container1: {
         flexGrow: 1,
         padding: 20,
@@ -129,11 +141,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 15,
     },
-
     imageContainer1: {
         marginRight: 15,
     },
-
     image1: {
         width: 150,
         height: 100,
@@ -143,32 +153,28 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     applyButton: {
-
         padding: 10,
         borderRadius: 5,
         marginTop: 10,
     },
-
     applyButtonText: {
         color: 'white',
-        textAlign: 'center',
+        fontWeight: "700"
     },
-
-
     container: {
         flex: 1,
-        flexDirection: 'row', // Arrange cards in a row
-        justifyContent: 'space-between', // Space between the cards
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
     },
     typeofloan: {
         fontSize: 20,
-        marginLeft: 20
+        marginLeft: 20,
+        fontWeight: "700"
     },
     line: {
         borderColor: "white",
-
     },
     totaltext: {
         display: "flex",
@@ -181,7 +187,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         flexDirection: "row"
-
     },
     card: {
         width: '48%',
@@ -205,7 +210,7 @@ const styles = StyleSheet.create({
     applynow: {
         color: "blue",
         fontSize: 20,
-
+        fontWeight: "700",
         borderColor: 'blue',
         display: "flex",
         justifyContent: "center",
@@ -217,7 +222,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-
     },
     text: {
         display: "flex",
@@ -227,21 +231,18 @@ const styles = StyleSheet.create({
         color: "blue",
         marginTop: 10
     },
-
     btn: {
         display: "flex",
         justifyContent: "center",
         height: 50,
         width: 100,
         color: "blue"
-
     },
     topimage: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-
     }
     , textcontainer: {
         marginTop: 10,
@@ -250,5 +251,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     }
-
 })

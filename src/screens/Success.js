@@ -44,11 +44,6 @@ export default function Success(props) {
                     <Button title="Go To Home" onPress={routetothenextpage}></Button>
                 </View>
             </View>
-
-            {/* 
-            <Footer /> */}
-
-
         </View>
 
     )

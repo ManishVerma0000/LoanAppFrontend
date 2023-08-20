@@ -27,7 +27,7 @@ export default function StepOne(props) {
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
                 <View style={styles.StepOne}>
-                    <Image style={{ marginLeft: 10 }} source={require('../../assets/Steone.png')}></Image>
+                    <Image style={{ marginLeft: 22 }} source={require('../../assets/Steone.png')}></Image>
                 </View>
                 <View style={styles.textmaindiv}>
                     <Text style={styles.pleasetext}>
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
 
     },
     textmaindiv: {
+        margin: 22,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -228,7 +229,8 @@ const styles = StyleSheet.create({
     passwordbtn: {
         display: "flex",
         justifyContent: 'center',
-        alignItems: "center"
+        alignItems: "center",
+        marginRight: 20
     },
     password: {
         display: "flex",

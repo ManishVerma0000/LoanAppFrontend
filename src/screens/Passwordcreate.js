@@ -10,8 +10,6 @@ export default function Passworcreate(props) {
     const userdata = useSelector((state) => state.reducer)
 
     useEffect(() => {
-
-
         setEmail(userdata[0].email)
         setphone(userdata[0].phonenumber)
         setFirstname(userdata[0].fullname)
@@ -39,11 +37,11 @@ export default function Passworcreate(props) {
                 phone: phone,
                 password: password
             }
+            console.log(data)
             axios.post("http://192.168.197.169:7000/api/signup", data).then((data) => {
                 Toast.show({
                     type: 'success',
                     text1: 'Details are saved successfully',
-
                 });
                 props.navigation.navigate("otp")
                 console.log(data)

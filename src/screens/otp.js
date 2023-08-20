@@ -1,21 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import Toast from 'react-native-toast-message';
 
-export default function Otp() {
+export default function Otp(props) {
     const [phone, setphone] = useState('')
+    const [otp, setOtp] = useState('')
     const passworddetailsdata = useSelector((state) => state.passwoprdreducer)
     const usedetails = useSelector((state) => state.reducer)
     useEffect(() => {
         // usedetails[0].phonenumber
-        setphone('+91 9671902964')
+        setphone("8818040732")
+        // console.log(usedetails[0].phonenumber)
     }, [])
 
     const registerfunction = () => {
         props.navigation.navigate("Login")
     }
+    const submitotp = () => {
+        const data = {
+            email: "manishverma88180@gmail.com",
+            otp: otp
+        }
+        axios.post('http://192.168.197.169:7000/api/optverify', data, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((result) => {
+            console.log(result)
+            Toast.show({
+                type: 'success',
+                text1: 'otp verified'
+            });
+            props.navigation.navigate("TotalLoan")
+        }).catch((err) => {
+            console.log(err)
+            Toast.show({
+                type: 'error',
+                text1: 'otp mismatch'
+            });
+            props.navigation.navigate("otp")
+
+        })
+        console.log(otp, 'this is thev value of the otp')
+    }
+    const handleInputChange = (text) => {
+        setOtp(text);
+    };
     return (
         <View>
+            <Toast />
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
@@ -53,6 +89,8 @@ export default function Otp() {
                             placeholder="enter the otp"
                             keyboardType="email-address"
                             autoCapitalize="none"
+                            onChangeText={handleInputChange}
+
                         />
                     </View>
 
@@ -60,7 +98,9 @@ export default function Otp() {
                 </View>
 
                 <View style={styles.passwordbtn}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        submitotp()
+                    }}>
                         <Text style={styles.buttonText}>Submit OTP</Text>
                     </TouchableOpacity>
                 </View>

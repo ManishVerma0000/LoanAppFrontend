@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid, DatePickerAndroid } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 // import DocumentPicker from 'react-native-document-picker';
+import { useFonts } from 'expo-font';
 
 import * as DocumentPicker from 'expo-document-picker';
 import Toast from 'react-native-toast-message';
@@ -36,7 +37,7 @@ export default function DocumentUpload() {
 
 
 
-    const pickDocumentforForm16 = async () => {
+    const pickDocumentforForm16 = async (props) => {
 
         try {
 
@@ -109,24 +110,32 @@ export default function DocumentUpload() {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then((result) => {
-
-
                 Toast.show({
                     type: 'success',
                     text1: 'Uploaded success',
                     position: 'top',
                     visibilityTime: 2000,
                 });
+                //Success
+                props.navigation.navigate("Success")
 
             }).catch((err) => {
-
 
                 Toast.show({
                     type: 'error',
                     text1: 'Uploaded failed',
                     position: 'top',
+                    topOffset: 60,
                     visibilityTime: 2000,
+                    style: {
+                        backgroundColor: 'red',
+                        left: 100,
+                        top: 10,
+                        borderRadius: 8,
+                        paddingHorizontal: 10
+                    },
                 });
+                props.navigation.navigate("Upload")
 
             })
         }

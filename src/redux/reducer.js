@@ -4,10 +4,7 @@ import { Password_Details } from "./constants";
 import { toatalAmount } from "./constants";
 
 const intialState = []
-
-
 export const reducer = (state = intialState, action) => {
-
     switch (action.type) {
         case Step_One_details:
             return [

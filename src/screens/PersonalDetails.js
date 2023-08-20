@@ -17,9 +17,8 @@ export default function PersonalDetails(props) {
     const handlePickerChange = (itemValue, itemIndex) => {
         setSelectedValue(itemValue);
         setMaritail(selectedValue)
-
     };
-    const submitdetails = async () => {
+    const submitdetails = async (props) => {
         const data = {
             Email: email,
             Name: name,
@@ -38,12 +37,14 @@ export default function PersonalDetails(props) {
                 type: 'success',
                 text1: 'Details saved successfullly'
             });
+            props.navigation.navigate("Upload")
         }).catch((err) => {
             Toast.show({
                 type: 'error',
                 text1: 'error occurs',
 
             });
+            props.navigation.navigate("personaldetails")
         })
     }
     return (
