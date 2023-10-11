@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Button } from 'react-native-elements';
 import { color } from 'react-native-elements/dist/helpers';
+
 export default function HomePage(props) {
     const rendertothenextpage = () => {
         console.warn("hello")
@@ -13,59 +14,36 @@ export default function HomePage(props) {
         props.navigation.navigate("Home2")
     }
     return (
-        <View style={styles.container}>
-            <View>
-                <View style={styles.uppersectionpart}>
-                    <Image source={require('../../assets/one.png')}></Image>
-                    <TouchableOpacity style={styles.skipsection}>
-                        <Text style={styles.textforskip} onPress={settothenextpage}> Skip</Text>
-                    </TouchableOpacity>
+        <>
+            <View style={styles.container}>
+                <View style={styles.logoContainer}>
+                    <Image
+                        source={require('../../assets/g12.png')}
+                        style={styles.logo}
+                    />
                 </View>
-
-                <View>
-                    <View style={styles.midsectionpart}>
-                        <Image source={require('../../assets/g12.png')}></Image>
-
-                    </View>
-
-                </View>
-
+                <Text style={styles.text}>Need Money ? We Heard You ?</Text>
+                <Text style={styles.text2}>Get the Best Loans For Your Personal & Business Needs. Just Get in Touch with Us</Text>
+                <Button
+                    style={styles.bluenetbutton}
+                    title="Get Started"
+                    onPress={() => settothenextpage()} />
+                    <Text style={styles.text3}></Text>
+                <Button
+                    style={styles.bluenetbutton2}
+                    title="Skip"
+                    onPress={() =>  props.navigation.navigate("Login")} />
             </View>
-            <View style={styles.textmoney}>
-                <Text style={styles.need}>
-                    Need Money? We Heard You?
-                </Text>
-
-            </View>
-
-            <View style={styles.lowertext}>
-                <Text style={{
-                    padding: 20, fontSize: 15,
-
-                }}>
-                    Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
-                </Text>
-
-            </View>
-            <View style={styles.bootombluecolor}>
-
-                <TouchableOpacity style={styles.bluenetbutton} onPress={rendertothenextpage}>
-                    <Image source={require("../../assets/bluenextbutton.png")}>
-                    </Image>
-                </TouchableOpacity>
-            </View>
-
-
-        </View >
+        </>
     );
 }
 
 const styles = StyleSheet.create({
     bluenetbutton: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-end",
-
+        marginBottom: 10
+    },
+    bluenetbutton2 : {
+        marginTop : 30
     },
     need: {
         fontSize: 20,
@@ -92,8 +70,9 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: "white"
-
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff', // Set your background color here
     },
     uppersectionpart: {
 
@@ -118,6 +97,31 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 200, // Set your logo image dimensions
+        height: 200, // Set your logo image dimensions
+        resizeMode: 'contain', // Adjust this based on your logo aspect ratio
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30
+    },
+    text2: {
+        fontSize: 18,
+        // fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30,
+        textAlign: 'center'
+    },
+    text3 : {
+        marginBottom : 10
     }
 });
 

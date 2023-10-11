@@ -16,7 +16,7 @@ import Card from './src/screens/Card';
 import { TotalLoan } from './src/screens/TotalLoan';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Otp from './src/screens/Otp';
+// import Otp from './src/screens/Otp';
 import PersonalDetails from './src/screens/PersonalDetails';
 import HomaLoanApplication from './src/screens/HomeLoanApplication';
 import TotalAmount from './src/screens/totalAmount';
@@ -28,7 +28,6 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name='Notofication' component={Notofication} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
@@ -40,7 +39,6 @@ export default function App() {
           <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Home2" component={HomePage2} />
           <Stack.Screen name="Home3" component={HomePage3} />
-          <Stack.Screen name="otp" component={Otp} />
           <Stack.Screen name="Success" component={Success} />
           <Stack.Screen name="personaldetails" component={PersonalDetails} />
           <Stack.Screen name="Card" component={Card} />

@@ -5,75 +5,70 @@ export default function HomePage3(props) {
     const getstarted = () => {
         props.navigation.navigate('Login')
     }
+    const leftsidefunction = () => {
+        props.navigation.navigate("Home2")
+    }
     return (
-        <View style={styles.container}>
-            <View>
-                <View style={styles.uppersectionpart}>
-                    <Image source={require('../../assets/one.png')}></Image>
-                    <TouchableOpacity style={styles.skipsection}>
-                        <Text style={styles.textforskip} onPress={getstarted}> Skip</Text>
-                    </TouchableOpacity>
+        <>
+            <View style={styles.container}>
+                <View style={styles.logoContainer}>
+                    <Image
+                        source={require('../../assets/image3.png')}
+                        style={styles.logo}
+                    />
                 </View>
-
-                <View>
-                    <View style={styles.midsectionpart}>
-                        <Image source={require('../../assets/image3.png')} style={{ height: 250 }} ></Image>
-                    </View>
+                <Text style={styles.text}>Loan Approval In 48 Hrs.</Text>
+                <Text style={styles.text2}>Get your loan approved in just some steps once you are onboarded with us. Don't wait!</Text>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        style={styles.bluenetbutton}
+                        title="Prev"
+                        onPress={() => leftsidefunction()}
+                    />
+                    <View style={{ flex: 1 }} />
+                    <Button
+                        style={styles.bluenetbutton}
+                        title="Let's Start"
+                        onPress={() => getstarted()}
+                    />
                 </View>
-
             </View>
-            <View style={styles.textmoney}>
-                <Text style={styles.need}>
-                    Loan Approval In 48 Hrs.
-                </Text>
-
-            </View>
-
-            <View style={styles.lowertext}>
-                <Text style={{
-                    padding: 20, fontSize: 15,
-
-                }}>
-                    Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You?
-                </Text>
-            </View>
-            <StatusBar style="auto" />
-            <View style={styles.buttonpressme}>
-                < Button title='Get Started' onPress={getstarted}></Button>
-
-            </View>
-        </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
-    btn: {
-        backgroundColor: "blue",
-        width: 100,
-        height: 50,
-        fontWeight: "bold"
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16, // Adjust as needed
     },
-    buttonpressme: {
-        backgroundColor: "white",
-
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
+    bluenetbutton: {
+        backgroundColor: 'blue', // Example button style
+        padding: 10, // Example button style
+        borderRadius: 5, // Example button style
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 300, // Set your logo image dimensions
+        height: 300, // Set your logo image dimensions
+        resizeMode: 'contain', // Adjust this based on your logo aspect ratio
     },
     text2: {
         color: "black",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 20,
+
     },
     lowertext: {
-
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: 30
-
-    },
-    need: {
-        fontSize: 20,
-        fontWeight: "600"
+        padding: 30,
+        fontSize: 15,
     },
     textmoney: {
         height: 30,
@@ -81,14 +76,16 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
         fontWeight: 'bold',
-
+        fontSize: 24
     },
     container: {
         flex: 1,
-        backgroundColor: "white"
-
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff', // Set your background color here
     },
     uppersectionpart: {
+
         display: "flex",
         flexDirection: "row",
         justifyContent: 'space-evenly',
@@ -97,7 +94,15 @@ const styles = StyleSheet.create({
         display: "flex",
         marginLeft: 50
     },
+    skipsection: {
+        display: "flex",
+        marginLeft: 50
+    },
     textforskip: {
+        margin: 10
+    },
+    textforskip: {
+        margin: 10,
         color: "blue",
         borderBottomWidth: 2,
         borderColor: "blue",
@@ -105,11 +110,26 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     midsectionpart: {
+        marginTop: 10,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        padding: 20
-
+        justifyContent: "center"
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30
+    },
+    text2: {
+        fontSize: 18,
+        // fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30,
+        textAlign: 'center'
+    },
+    text3: {
+        marginBottom: 10
     }
 });
 

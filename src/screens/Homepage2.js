@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-
+import { Button } from 'react-native-elements';
 export default function HomePage2(props) {
     const leftsidefunction = () => {
         props.navigation.navigate("Home")
@@ -10,64 +10,50 @@ export default function HomePage2(props) {
     }
     return (
         <View style={styles.container}>
-            <View>
-                <View style={styles.uppersectionpart}>
-                    <Image source={require('../../assets/one.png')}></Image>
-                    <TouchableOpacity style={styles.skipsection}>
-                        <Text style={styles.textforskip} onPress={rightsidefunction}> Skip</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View>
-                    <View style={styles.midsectionpart}>
-                        <Image source={require('../../assets/g10.png')}></Image>
-
-                    </View>
-
-                </View>
-
+            <View style={styles.logoContainer}>
+                <Image
+                    source={require('../../assets/g10.png')}
+                    style={styles.logo}
+                />
             </View>
-            <View style={styles.textmoney}>
-                <Text style={styles.text2}>
-                    Easy & Transparent Loan Process
-                </Text>
-
+            <Text style={styles.text}>Easy & Transparent Loan Process</Text>
+            <Text style={styles.text2}>Get your loan approved in just some steps once you are onboarded with us. Don't wait!</Text>
+            <View style={styles.buttonContainer}>
+                <Button
+                    style={styles.bluenetbutton}
+                    title="Previous"
+                    onPress={() => leftsidefunction()}
+                />
+                <View style={{ flex: 1 }} /> 
+                <Button
+                    style={styles.bluenetbutton}
+                    title="Next"
+                    onPress={() => rightsidefunction()}
+                />
             </View>
-
-            <View style={styles.lowertext}>
-                <Text style={styles.lowertext}>
-                    Need Money? We Heard You? Need Money? We Heard You? Need Money? We Heard You? Need Money?
-                </Text>
-            </View>
-
-            <View style={styles.twoimages}>
-                <View>
-                    <TouchableOpacity onPress={leftsidefunction}>
-                        <Image source={require("../../assets/leftsidebutton.png")}></Image>
-                    </TouchableOpacity>
-
-                </View>
-                <View>
-                    <TouchableOpacity onPress={rightsidefunction}>
-                        <Image source={require("../../assets/bluenextbutton.png")}></Image>
-
-                    </TouchableOpacity>
-
-
-                </View>
-            </View>
-
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    twoimages: {
-        margin: 40,
-        display: 'flex',
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16, // Adjust as needed
+      },
+      bluenetbutton: {
+        backgroundColor: 'blue', // Example button style
+        padding: 10, // Example button style
+        borderRadius: 5, // Example button style
+      },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 300, // Set your logo image dimensions
+        height: 300, // Set your logo image dimensions
+        resizeMode: 'contain', // Adjust this based on your logo aspect ratio
     },
     text2: {
         color: "black",
@@ -92,8 +78,9 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: "white"
-
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff', // Set your background color here
     },
     uppersectionpart: {
 
@@ -125,7 +112,22 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
-
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30
+    },
+    text2: {
+        fontSize: 18,
+        // fontWeight: 'bold',
+        color: '#333', // Set your text color here
+        marginBottom: 30,
+        textAlign: 'center'
+    },
+    text3: {
+        marginBottom: 10
     }
 });
 

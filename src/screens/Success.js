@@ -1,94 +1,86 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, Button, TouchableOpacity, } from "react-native";
-import Footer from "./Footer";
-
-
+import React from "react";
+import { Text, View, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
 
 export default function Success(props) {
+  const routetothenextpage = () => {
+    props.navigation.navigate("TotalLoan");
+  }
 
-    const routetothenextpage = () => {
-        props.navigation.navigate("Upload")
-    }
-    return (
-        <View style={styles.container} >
-            <View style={styles.containerfirst}>
-                <View>
-                    <Image source={require("../../assets/next.png")}></Image>
-                </View>
-
-                <Text style={{ marginTop: 15, color: "blue", fontWeight: "bold", fontSize: 18 }}>HOME LOAN APPLICATION</Text>
-
-                <View>
-                    <Image source={require("../../assets/face.png")}></Image>
-                </View>
-            </View>
-            <View style={styles.containersecond}>
-                <View style={styles.innercontainer}>
-                    <View>
-                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                            Hurray ! You Have successfully filled the form
-
-                        </Text>
-                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                            Sit back till our team completes  verification
-                        </Text>
-                        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                            You will see a notification under notification tab
-                        </Text>
-                    </View>
-
-                </View>
-            </View>
-            <View style={styles.containerthird}>
-                <View >
-                    <Button title="Go To Home" onPress={routetothenextpage}></Button>
-                </View>
-            </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        {/* <Image source={require("../../assets/next.png")} style={styles.logo} /> */}
+        <Text style={styles.headerText}>HOME LOAN APPLICATION</Text>
+        <Image source={require("../../assets/face.png")} style={styles.logo} />
+      </View>
+      <View style={styles.content}>
+        <View style={styles.innercontainer}>
+          <Text style={styles.successText}>Hurray! You have successfully filled the form.</Text>
+          <Text style={styles.successText}>Sit back while our team completes verification.</Text>
+          <Text style={styles.successText}>You will see a notification under the Notification tab.</Text>
         </View>
-
-    )
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={routetothenextpage}>
+          <Text style={styles.buttonText}>Go To Home</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
-
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "white"
-    },
-    innercontainer: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 20
-    },
-
-    containerfirst: {
-
-        flex: 1,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-    containerfourth: {
-        flex: 1,
-        backgroundColor: "red",
-        marginTop: 20
-    },
-    containersecond: {
-        flex: 1,
-        //  backgroundColor: "red"
-    },
-    containerthird: {
-
-
-        flex: 1,
-        marginTop: 60,
-        // backgroundColor: "yellow",
-        // display: "flex",
-        // justifyContent: "center",
-        // alignItems: "center"
-        padding: 30,
-    }
-
-})
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 20,
+  },
+  header: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+  logo: {
+    height: 40,
+    width: 40,
+  },
+  headerText: {
+    marginTop: 15,
+    color: "blue",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  content: {
+    flex: 4,
+    justifyContent: "center",
+  },
+  innercontainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  successText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    marginVertical: 5,
+  },
+  buttonContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#5045E6",
+    padding: 15,
+    borderRadius: 12,
+    width: 200,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});

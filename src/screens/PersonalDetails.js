@@ -1,245 +1,218 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios'
+import axios from 'axios';
 import Toast from 'react-native-toast-message';
+
 export default function PersonalDetails(props) {
-    const [selectedOption, setSelectedOption] = useState('Select');
-    const [email, setEmail] = useState("")
-    const [name, setName] = useState("")
-    const [phone, setPhone] = useState('')
-    const [Maritail, setMaritail] = useState("")
-    const options = ['Select', 'Unmarried', 'Married'];
-    const [selectedValue, setSelectedValue] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState('Select');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState('');
+  const [Maritail, setMaritail] = useState("");
+  const options = ['Select', 'Unmarried', 'Married'];
+  const [dob, setdob] = useState('');
 
-    const [dob, setdob] = useState('')
+  const handlePickerChange = (itemValue) => {
+    setSelectedOption(itemValue);
+    setMaritail(itemValue);
+  };
 
-    const handlePickerChange = (itemValue, itemIndex) => {
-        setSelectedValue(itemValue);
-        setMaritail(selectedValue)
+  const submitDetails = async () => {
+    const data = {
+      Email: email,
+      Name: name,
+      MaritialStatus: Maritail,
+      DOB: dob,
+      PhoneNumber: phone,
     };
-    const submitdetails = async (props) => {
-        const data = {
-            Email: email,
-            Name: name,
-            MaritialStatus: Maritail,
-            DOB: dob,
-            PhoneNumber: phone
-        }
-        await axios.post('http://192.168.197.169:7000/api/personaldetails', data, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((data) => {
+    try {
+    //   await axios.post('http://192.168.197.169:7000/api/personaldetails', data, {
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //   });
 
-            Toast.show({
-                type: 'success',
-                text1: 'Details saved successfullly'
-            });
-            props.navigation.navigate("Upload")
-        }).catch((err) => {
-            Toast.show({
-                type: 'error',
-                text1: 'error occurs',
+    //   Toast.show({
+    //     type: 'success',
+    //     text1: 'Details saved successfully',
+    //   });
 
-            });
-            props.navigation.navigate("personaldetails")
-        })
+      props.navigation.navigate('Upload');
+    } catch (err) {
+      Toast.show({
+        type: 'error',
+        text1: 'Error occurred',
+      });
+
+      props.navigation.navigate('personaldetails');
     }
-    return (
-        <View>
-            <Toast />
-            <View style={styles.topcontainer}>
-                <Image style={styles.Imagestyle} source={require("../../assets/next.png")}></Image>
-                <Text style={{ fontWeight: "bold", fontSize: 17 }}>Home Loan Application </Text>
-                <Image style={styles.Imagestyle} source={require("../../assets/g10.png")}></Image>
-            </View>
+  };
 
+  return (
+    <View style={styles.container}>
+      <Toast />
 
-            <View >
-                <Text style={styles.PersonalDetails}>
-                    Personal Details
-                </Text>
+      <View style={styles.topContainer}>
+        {/* <Image style={styles.imageStyle} source={require("../../assets/next.png")} /> */}
+        <Text style={styles.headerText}>Home Loan Application</Text>
+        <Image style={styles.imageStyle} source={require("../../assets/g10.png")} />
+      </View>
 
-            </View>
-            <View>
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontSize: 17, fontWeight: "600" }}>Name According To legal Document</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="enter the Name"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        onChangeText={(text) => {
+      <View style={styles.formSection}>
+        <Text style={styles.personalDetailsText}>Personal Details</Text>
+      </View>
 
-                            setName(text)
-                        }}
-                    />
-                </View>
-            </View>
-            <View>
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontSize: 17, fontWeight: "600" }}>Date Of Birth</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="enter the Birth"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        onChangeText={(text) => {
-                            setdob(text)
-                        }}
-                    />
-                </View>
-            </View>
-            <View>
-                <Text style={{ marginLeft: 30, color: "black", fontWeight: "600", fontSize: 17, borderColor: 'blue' }}>Marital Status</Text>
-                <View style={styles.emailinputtag1}>
-                    <Picker
-                        selectedValue={selectedOption}
-                        onValueChange={handlePickerChange}
-                        style={styles.pickerdiv}
-                    >
-                        {options.map((option) => (
-                            <Picker.Item key={option} label={option} value={option} onChange={(text) => {
-                                console.log(text)
-                                // setMaritail(text)
-                            }} />
-                        ))}
-                    </Picker>
-                </View>
-            </View>
-            <View>
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontSize: 17, fontWeight: "600" }}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="enter the Email"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        onChangeText={(text) => {
-                            setEmail(text)
-                        }}
-                    />
-                </View>
+      <View style={styles.inputSection}>
+        <Text style={styles.inputLabel}>Name According to Legal Document</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Name"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          onChangeText={text => setName(text)}
+        />
+      </View>
 
+      <View style={styles.inputSection}>
+        <Text style={styles.inputLabel}>Date of Birth</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Birth"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          type = "date"
+          onChangeText={text => setdob(text)}
+        />
+      </View>
 
-            </View>
+      <View style={styles.inputSection}>
+        <Text style={styles.inputLabel}>Marital Status</Text>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={selectedOption}
+            onValueChange={handlePickerChange}
+            style={styles.picker}
+          >
+            {options.map(opt => {
+                return (
+                    <Picker.Item key={opt} label={opt} value={opt} />
+                )
+            })
 
-            <View>
-
-
-                <View style={styles.emailinputtag}>
-                    <Text style={{ marginBottom: 10, color: "black", fontSize: 17, fontWeight: "600" }}>Phone Number</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Enter the Phone Number"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        onChangeText={(text) => {
-
-                            setPhone(text)
-                        }}
-                    />
-                </View>
-            </View>
-
-            <View style={styles.passwordbtn}>
-                <TouchableOpacity style={styles.button} onPress={submitdetails}>
-                    <Text style={styles.buttonText}
-                    >Click Me</Text>
-                </TouchableOpacity>
-            </View>
-
+            }
+            {/* {options.map(option => (
+              <Picker.Item key={option} label={option} value={option} />
+            )} */}
+          </Picker>
         </View>
-    )
+      </View>
+
+      <View style={styles.inputSection}>
+        <Text style={styles.inputLabel}>Email</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          onChangeText={text => setEmail(text)}
+        />
+      </View>
+
+      <View style={styles.inputSection}>
+        <Text style={styles.inputLabel}>Phone Number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the Phone Number"
+          keyboardType="phone-pad"
+          autoCapitalize="none"
+          onChangeText={text => setPhone(text)}
+        />
+      </View>
+
+      <View style={styles.buttonSection}>
+        <TouchableOpacity style={styles.button} onPress={submitDetails}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
 const styles = StyleSheet.create({
-    picker: {
-        borderWidth: 5,
-        borderColor: 'blue'
-    },
-    pickerdiv: {
-        width: 300,
-        height: 50,
-        borderWidth: 3,
-        borderColor: 'gray',
-        borderRadius: 5,
-
-    },
-    emailinputtag1: {
-        marginBottom: 20,
-        borderRadius: 10,
-        borderWidth: 1,
-        width: 300,
-        marginLeft: 30,
-    },
-    Imagestyle: {
-        height: 50,
-        width: 50,
-    },
-    register: {
-        color: "#5045E6"
-    },
-    buttonText: {
-        color: 'black',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-
-    button: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 10,
-        borderRadius: 12,
-        width: 281,
-        height: 45,
-        backgroundColor: "#5045E6",
-        margin: 10
-
-    },
-    passwordbtn: {
-        display: "flex",
-        justifyContent: 'center',
-        alignItems: "center"
-    },
-
-    innertext: {
-        color: "#5F5F5F"
-    },
-    input: {
-        width: 300,
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        paddingHorizontal: 10,
-        fontSize: 16,
-        borderRadius: 10
-    },
-    topcontainer: {
-        display: "flex",
-
-        justifyContent: 'space-around',
-        alignItems: "center",
-        flexDirection: "row",
-    },
-    PersonalDetails: {
-        color: "blue",
-        margin: 10,
-        fontSize: 17,
-        fontWeight: "bold"
-    },
-    emailinputtag: {
-        color: "#5045E6",
-        marginLeft: 30,
-        marginBottom: 20
-    },
-    textheadsection: {
-        display: "flex",
-        justifyContent: 'center',
-        alignItems: "center",
-        lineHeight: "21.13px",
-        fontWeight: '500'
-    },
-})
+  container: {
+    flex: 1,
+    backgroundColor : "white"
+  },
+  topContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
+  },
+  imageStyle: {
+    height: 50,
+    width: 50,
+  },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  personalDetailsText: {
+    color: "blue",
+    margin: 10,
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  inputSection: {
+    marginVertical: 20,
+    marginHorizontal: 30,
+  },
+  inputLabel: {
+    marginBottom: 10,
+    color: "black",
+    fontSize: 17,
+    fontWeight: "600",
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    fontSize: 16,
+    borderRadius: 10,
+  },
+  pickerContainer: {
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 10,
+    width: "100%",
+    // marginLeft: 30,
+  },
+  picker: {
+    height: 50,
+    borderWidth: 3,
+    borderColor: "gray",
+    borderRadius: 5,
+  },
+  buttonSection: {
+    alignItems: "center",
+  },
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 12,
+    width: 281,
+    height: 45,
+    backgroundColor: "#5045E6",
+    margin: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
