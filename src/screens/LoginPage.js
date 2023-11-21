@@ -1,9 +1,12 @@
 import React, { Fragment, useState } from "react";
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 import api from "../../api/api";
 import axios from "axios";
+import { TextInput } from "react-native-paper";
 export default function Loginpage(props) {
+    const [passwordVisible, setpasswordvisible] = useState(true)
     const [email, setemail] = useState('')
     const [password, setPassword] = useState('')
     const handleInputChange = (text) => {
@@ -22,7 +25,7 @@ export default function Loginpage(props) {
         props.navigation.navigate("ForgetPassword")
     }
     const settothenextpagelogin = () => {
-        props.navigation.navigate("personaldetails")
+        props.navigation.navigate("Register")
     }
     const functionclick = async () => {
         try {
@@ -30,8 +33,8 @@ export default function Loginpage(props) {
                 email: email,
                 password: password
             }
-            console.warn(data)
-            await axios.post("http://192.168.197.169:7000/api/login", data, {
+
+            await axios.post("http://10.81.48.236:7000/api/login", data, {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -53,14 +56,12 @@ export default function Loginpage(props) {
                 });
                 props.navigation.navigate("Login")
             })
-
-
         } catch (error) {
             console.log(error)
         }
     }
     return (
-        <View>
+        <View style={{ backgroundColor: "white" }}>
             <Toast />
             <View style={styles.container}>
                 <View style={styles.imagecontainer}>
@@ -90,11 +91,21 @@ export default function Loginpage(props) {
                         <Text style={{ marginLeft: 10, fontSize: 17, fontWeight: "700" }} >Password</Text>
                         <TextInput
                             style={styles.input}
-                            type="password"
-                            placeholder="Enter your password"
-                            keyboardType="email-address"
-                            autoCapitalize="none"
+                            label='password'
                             secureTextEntry={true}
+                            right={
+                                <TextInput.Icon
+                                    name={passwordVisible ? 'eye' : 'eye-off'}
+                                    onPress={() => {
+                                        setpasswordvisible(!passwordVisible)
+                                    }}
+                                >
+                                    <Icon
+                                        name={passwordVisible ? 'eye' : 'eye-off'}
+                                        size={40}
+                                    />
+                                </TextInput.Icon>
+                            }
                             onChangeText={handleInputChangepassword}
                         />
 
@@ -141,6 +152,7 @@ const styles = StyleSheet.create({
     textmaindiv: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 15
     },
 
     pleasetext: {
@@ -228,7 +240,7 @@ const styles = StyleSheet.create({
 
     },
     buttonText: {
-        color: 'black',
+        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -258,11 +270,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         fontSize: 16,
         borderRadius: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        backgroundColor: "white"
     },
     textwelcome: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 15
     },
     imagecontainer: {
         display: "flex",

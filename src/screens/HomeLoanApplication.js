@@ -46,7 +46,7 @@ export default function HomaLoanApplication(props) {
     //personaldetails
 
     const sendtototalamountpage = () => {
-        axios.post("http://192.168.197.169:7000/api/totalloan", data, {
+        axios.post("http://localhost:7000/api/totalloan", data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -184,18 +184,19 @@ export default function HomaLoanApplication(props) {
                         </View>
                     </View>
                 </View>
+
                 <View style={styles.container}>
-                    <View>
+                    {/* <View>
                         <TouchableOpacity style={styles.checkboxContainer} onPress={handleCheckboxToggle}>
                             {
                                 isChecked ? <Image source={require("../../assets/Vector.png")} style={{ marginRight: 10 }}></Image> : <Image source={require("../../assets/Vector.png")} style={{ backgroundColor: "darkblue", overflow: "hidden", marginRight: 10 }}></Image>
                             }
                             {/* <View style={[styles.checkbox, isChecked ? <Image></Image> : styles.unchecked]} /> */}
-                        </TouchableOpacity>
-                    </View>
-                    <View>
+                    {/* </TouchableOpacity>
+                    </View> */}
+                    {/* <View>
                         <Text style={styles.label}>Agree to Terms and Conditions</Text>
-                    </View>
+                    </View> */}
                 </View>
 
                 <View style={styles.clickbutton}>
@@ -303,5 +304,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     }
-
 })

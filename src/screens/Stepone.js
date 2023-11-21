@@ -4,20 +4,31 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { steponedetails } from "../redux/action";
 import { useDispatch } from 'react-redux'
+import Toast from "react-native-toast-message";
 
 export default function StepOne(props) {
     const dispatch = useDispatch()
     const [email, setEmail] = useState('')
     const [fullname, setFullname] = useState('')
     const [phonenumber, setphonenumber] = useState('')
-
-    const functionlogin = () => {
-        props.navigation.navigate("Login")
-    }
-
     const addthevalue = (data) => {
         dispatch(steponedetails(data))
-        props.navigation.navigate("Password")
+        axios.post("http://10.81.48.236:7000/api/signup", data).then((res) => {
+            console.log(data)
+            Toast.show({
+                type: 'success',
+                text1: 'Details are added successfully'
+            });
+            props.navigation.navigate("otp")
+        }).catch((err) => {
+            console.log(err)
+            Toast.show({
+                type: 'error',
+                text1: 'Details are added successfully'
+            });
+
+
+        })
 
     }
     return (
@@ -27,7 +38,7 @@ export default function StepOne(props) {
                     <Image style={styles.Image} source={require('../../assets/rotateImage.png')} ></Image>
                 </View>
                 <View style={styles.StepOne}>
-                    <Image style={{ marginLeft: 22 }} source={require('../../assets/Steone.png')}></Image>
+                    <Image style={{ marginLeft: 25 }} source={require('../../assets/Steone.png')}></Image>
                 </View>
                 <View style={styles.textmaindiv}>
                     <Text style={styles.pleasetext}>
@@ -103,19 +114,7 @@ export default function StepOne(props) {
                         }}>Next</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.imagefont}>
-                    <Image source={require('../../assets/GoogleLogin.png')}></Image>
-                    <Image source={require('../../assets/facebookLogin.png')}></Image>
-                    <Image source={require('../../assets/Group11.png')}></Image>
-                </View>
-                <View style={styles.textheadsection}>
-                    <Text>
-                        <Text style={styles.innertext}>
-                            Already a  Member,
-                        </Text>
-                        <Text style={styles.register} onPress={functionlogin}> Login Now</Text>
-                    </Text>
-                </View>
+
             </View>
             <View style={styles.leftsideimage}>
                 <Image source={require('../../assets/bottomlogin.png')}>
@@ -128,7 +127,6 @@ export default function StepOne(props) {
 const styles = StyleSheet.create({
     login: {
         color: "blue"
-
 
     },
     textmaindiv: {
@@ -155,9 +153,6 @@ const styles = StyleSheet.create({
     },
     StepOne: {
         height: 50,
-
-
-
     },
 
     headerofallinput: {
@@ -175,7 +170,8 @@ const styles = StyleSheet.create({
     leftsideimage: {
         display: "flex",
         flexDirection: "row-reverse",
-        transform: [{ rotate: '180deg' }]
+        transform: [{ rotate: '180deg' }],
+        backgroundColor: "white"
 
     },
     textheadsection: {
@@ -218,7 +214,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     buttonText: {
-        color: 'black',
+        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -230,7 +226,7 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: 'center',
         alignItems: "center",
-        marginRight: 20
+        marginRight: 25
     },
     password: {
         display: "flex",

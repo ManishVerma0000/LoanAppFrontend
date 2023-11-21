@@ -21,14 +21,10 @@ export default function Passworcreate(props) {
     const [phone, setphone] = useState('')
     const [email, setEmail] = useState('')
 
-
-
     const nextpageotp = (data) => {
         dispatch(passwordDetails(data))
 
     }
-
-
     const registercomplete = () => {
         if (password == confirmapassword) {
             const data = {
@@ -38,21 +34,26 @@ export default function Passworcreate(props) {
                 password: password
             }
             console.log(data)
-            axios.post("http://192.168.197.169:7000/api/signup", data).then((data) => {
+            axios.post("http://localhost:7000/api/signup", data).then((data) => {
+                console.log(data)
+
+                axios.get("http://localhost:7000/api/otp").then((data) => {
+                    console.log('otp is sent')
+                }).catch((err) => {
+                    console.log(err)
+                })
                 Toast.show({
                     type: 'success',
                     text1: 'Details are saved successfully',
                 });
                 props.navigation.navigate("otp")
-                console.log(data)
             }).catch((err) => {
                 console.log(err)
                 Toast.show({
                     type: 'error',
                     text1: 'User is Already exist',
-
                 });
-                props.navigation.navigate("Register")
+                props.navigation.navigate("Password")
             })
         } else {
 
@@ -83,7 +84,7 @@ export default function Passworcreate(props) {
 
                 <View>
                     <View style={styles.emailinputtag}>
-                        <Text style={{ marginLeft: 7 }}>Password</Text>
+                        <Text style={{ marginLeft: 7, fontWeight: "700", fontSize: 15 }}>Password</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Enter the Password"
@@ -95,7 +96,7 @@ export default function Passworcreate(props) {
                         />
                     </View>
                     <View style={styles.emailinputtag}>
-                        <Text style={{ marginLeft: 7 }}>Confirm Password</Text>
+                        <Text style={{ marginLeft: 7, fontWeight: "700", fontSize: 15 }}>Confirm Password</Text>
                         <TextInput
                             style={styles.input}
                             placeholder="Confirm Password"
@@ -106,8 +107,6 @@ export default function Passworcreate(props) {
                             }}
                         />
                     </View>
-
-
                 </View>
 
                 <View style={styles.passwordbtn}>
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     },
     textmaindiv: {
         flexDirection: 'row',
-        marginLeft: 10
+        marginLeft: 22
     },
 
     pleasetext: {
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     StepOne: {
-        marginLeft: 15,
+        marginLeft: 25,
 
     },
 
@@ -183,7 +182,8 @@ const styles = StyleSheet.create({
     },
     emailinputtag: {
         color: "#5045E6",
-        margin: 10
+        margin: 10,
+        marginLeft: 25
     },
 
     leftsideimage: {
@@ -217,8 +217,6 @@ const styles = StyleSheet.create({
     fontawesome: {
         fontFamily: 'Roboto',
         fontSize: 16,
-
-
     },
     button: {
         display: "flex",
@@ -237,12 +235,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     container: {
-
         backgroundColor: "white"
-    }, passwordbtn: {
+    },
+    passwordbtn: {
         display: "flex",
         justifyContent: 'center',
-        alignItems: "center"
+        alignItems: "center",
+        marginRight: 15
     },
     password: {
         display: "flex",
@@ -268,11 +267,7 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "flex-end",
-
-
-    },
-    Image: {
-
     }
+
 
 })

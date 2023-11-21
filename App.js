@@ -28,21 +28,20 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name='Notofication' component={Notofication} />
+        <Stack.Navigator initialRouteName="Home3">
+          <Stack.Screen name="personaldetails" component={PersonalDetails} />
+          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+          <Stack.Screen name='Notofication' component={Notofication} />
           <Stack.Screen name="TotalLoan" component={TotalLoan} />
           <Stack.Screen name="DashBoard" component={DashBoard} />
           <Stack.Screen name="Amount" component={TotalAmount} />
           <Stack.Screen name="Application" component={HomaLoanApplication} />
           <Stack.Screen name="Upload" component={DocumentUpload} />
-          <Stack.Screen name="Home" component={HomePage} />
           <Stack.Screen name="Home2" component={HomePage2} />
           <Stack.Screen name="Home3" component={HomePage3} />
           <Stack.Screen name="otp" component={Otp} />
           <Stack.Screen name="Success" component={Success} />
-          <Stack.Screen name="personaldetails" component={PersonalDetails} />
           <Stack.Screen name="Card" component={Card} />
           <Stack.Screen name="Password" component={Passworcreate} />
           <Stack.Screen name="Login" component={Loginpage} />

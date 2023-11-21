@@ -4,21 +4,20 @@ import { Picker } from '@react-native-picker/picker';
 import axios from 'axios'
 import Toast from 'react-native-toast-message';
 export default function PersonalDetails(props) {
-    const [selectedOption, setSelectedOption] = useState('Select');
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [phone, setPhone] = useState('')
     const [Maritail, setMaritail] = useState("")
     const options = ['Select', 'Unmarried', 'Married'];
-    const [selectedValue, setSelectedValue] = useState(options[0]);
+
 
     const [dob, setdob] = useState('')
+    const [ready, setReady] = useState(false)
 
-    const handlePickerChange = (itemValue, itemIndex) => {
-        setSelectedValue(itemValue);
-        setMaritail(selectedValue)
+    const handlePickerChange = (itemValue) => {
+        setMaritail(itemValue);
     };
-    const submitdetails = async (props) => {
+    const submitdetails = async () => {
         const data = {
             Email: email,
             Name: name,
@@ -26,26 +25,27 @@ export default function PersonalDetails(props) {
             DOB: dob,
             PhoneNumber: phone
         }
-        await axios.post('http://192.168.197.169:7000/api/personaldetails', data, {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((data) => {
-
+        await axios.post('http://10.81.48.236:7000/api/personaldetails', data).then(async (data) => {
             Toast.show({
                 type: 'success',
-                text1: 'Details saved successfullly'
+                text1: 'error occurs',
+
             });
             props.navigation.navigate("Upload")
+
         }).catch((err) => {
+            console.log(err)
             Toast.show({
                 type: 'error',
                 text1: 'error occurs',
 
             });
-            props.navigation.navigate("personaldetails")
+
         })
+        if (ready == true) {
+            props.navigation.navigate("Upload")
+        }
+
     }
     return (
         <View>
@@ -96,14 +96,14 @@ export default function PersonalDetails(props) {
                 <Text style={{ marginLeft: 30, color: "black", fontWeight: "600", fontSize: 17, borderColor: 'blue' }}>Marital Status</Text>
                 <View style={styles.emailinputtag1}>
                     <Picker
-                        selectedValue={selectedOption}
+                        selectedValue={Maritail}
                         onValueChange={handlePickerChange}
                         style={styles.pickerdiv}
                     >
                         {options.map((option) => (
                             <Picker.Item key={option} label={option} value={option} onChange={(text) => {
                                 console.log(text)
-                                // setMaritail(text)
+
                             }} />
                         ))}
                     </Picker>
@@ -145,7 +145,9 @@ export default function PersonalDetails(props) {
             </View>
 
             <View style={styles.passwordbtn}>
-                <TouchableOpacity style={styles.button} onPress={submitdetails}>
+                <TouchableOpacity style={styles.button} onPress={() => {
+                    submitdetails()
+                }}>
                     <Text style={styles.buttonText}
                     >Click Me</Text>
                 </TouchableOpacity>

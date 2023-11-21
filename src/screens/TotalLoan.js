@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
 
-
-
 export function TotalLoan(props) {
     const sendtothenextpage = () => {
         props.navigation.navigate("Application")
@@ -52,7 +50,6 @@ export function TotalLoan(props) {
                     </View>
                 </View>
             </View>
-
             <View >
                 <Text style={styles.typeofloan}>
                     Types of Loan
@@ -73,7 +70,6 @@ export function TotalLoan(props) {
                         }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
-
                 </View>
                 <View style={styles.card} >
                     <Image
@@ -88,11 +84,8 @@ export function TotalLoan(props) {
                         }}>20 lakhs</Text> </Text>
                         <Text >6% interest </Text>
                     </View>
-
                 </View>
-
             </View>
-
             <View style={styles.container}>
                 <View style={styles.card} >
                     <Image

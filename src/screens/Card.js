@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 4,
         elevation: 2,
-        width: '48%', // Adjust the width as per your desired layout
+        width: '48%',
     },
     cardImage: {
         width: '100%',

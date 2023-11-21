@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements';
 import { color } from 'react-native-elements/dist/helpers';
 export default function HomePage(props) {
     const rendertothenextpage = () => {
-        console.warn("hello")
+
         props.navigation.navigate("Home2")
     }
     const settothenextpage = () => {

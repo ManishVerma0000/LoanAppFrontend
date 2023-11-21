@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, Button, TouchableOpacity, } from "react-native";
-import Footer from "./Footer";
+
 
 
 
 export default function Success(props) {
 
     const routetothenextpage = () => {
-        props.navigation.navigate("Upload")
+        props.navigation.navigate("Home")
     }
     return (
         <View style={styles.container} >

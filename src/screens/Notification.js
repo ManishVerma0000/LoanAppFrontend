@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Image, Button, TouchableOpacity, ScrollView, } from "react-native";
-import Footer from "./Footer";
-
-
+import { Text, View, StyleSheet, Image, ScrollView, } from "react-native";
 
 export default function Notofication(props) {
 
     return (
         <ScrollView style={styles.container} >
             <View style={styles.containerfirst}>
-                <View>
+                <View style={{ marginLeft: 30 }}>
                     <Image source={require("../../assets/next.png")}></Image>
                 </View>
-
-                {/* <Text style={{ marginTop: 15, color: "blue", fontWeight: "bold", fontSize: 18 }}>HOME LOAN APPLICATION</Text> */}
-
-                <View>
+                <View style={{ marginRight: 30 }}>
                     <Image source={require("../../assets/face.png")}></Image>
                 </View>
 
@@ -131,6 +125,9 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         paddingBottom: 8,
         marginBottom: 8,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
     title1: {
         fontSize: 18,
@@ -161,7 +158,6 @@ const styles = StyleSheet.create({
     },
 
     containerfirst: {
-
 
         display: "flex",
         flexDirection: "row",

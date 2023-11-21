@@ -23,7 +23,8 @@ export default function Otp(props) {
             email: "manishverma88180@gmail.com",
             otp: otp
         }
-        axios.post('http://192.168.197.169:7000/api/optverify', data, {
+
+        axios.post('http://192.168.197:7000/api/optverify', data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -72,16 +73,11 @@ export default function Otp(props) {
                 </View>
                 <View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-
-
                         <Text style={{ fontSize: 23, fontWeight: 'bold', marginLeft: 30 }}> {phone}</Text>
                         <TouchableOpacity>
                             <Image source={require("../../assets/edit.png")} style={{ margin: 20 }} />
                         </TouchableOpacity>
-
                     </View>
-
                     <View style={styles.emailinputtag}>
                         <Text style={{ marginBottom: 10, color: "black", fontWeight: "900", fontSize: 17 }}>Enter the Otp</Text>
                         <TextInput
@@ -90,11 +86,8 @@ export default function Otp(props) {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onChangeText={handleInputChange}
-
                         />
                     </View>
-
-
                 </View>
 
                 <View style={styles.passwordbtn}>
@@ -255,9 +248,5 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
 
 
-    },
-    Image: {
-
     }
-
 })

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ToastAndroid, DatePickerAndroid } from "react-native";
-import { Picker } from '@react-native-picker/picker';
-// import DocumentPicker from 'react-native-document-picker';
-import { useFonts } from 'expo-font';
+
+
 
 import * as DocumentPicker from 'expo-document-picker';
 import Toast from 'react-native-toast-message';
-import Footer from "./Footer";
+
 import axios from "axios";
 
-export default function DocumentUpload() {
+export default function DocumentUpload(props) {
     const formData = new FormData()
 
     const [fileurifor16, setFileUriForForm16] = useState({
@@ -33,20 +32,17 @@ export default function DocumentUpload() {
     const [addharname, setAadharname] = useState("")
     const [panCard, setPancardName] = useState()
 
-
-
-
-
-    const pickDocumentforForm16 = async (props) => {
+    const pickDocumentforForm16 = async () => {
 
         try {
-
             const result = await DocumentPicker.getDocumentAsync({});
             console.log(result.type)
             if (result.type = "success") {
                 console.log('hey')
-                console.log(result)
+                console.log(result.name)
+
                 setFileUriForForm16(result)
+                setForm16name(result.name)
             }
         } catch (error) {
             console.log("error occurs")
@@ -62,6 +58,8 @@ export default function DocumentUpload() {
                 console.log('hey')
                 console.log(result)
                 setFileUriForPanCard(result)
+                setPancardName(result.name)
+
             }
         } catch (error) {
             console.log("error occurs")
@@ -77,6 +75,7 @@ export default function DocumentUpload() {
                 console.log('hey')
                 console.log(result)
                 setfileUriForAddhar(result)
+                setAadharname(result.name)
             }
         } catch (error) {
             console.log("occurs occurs")
@@ -105,22 +104,21 @@ export default function DocumentUpload() {
                 type: panccard.mimeType,
                 name: panccard.name,
             })
-            await axios.post("http://192.168.197.169:7000/api/document", formData, {
+            await axios.post("http://10.81.48.236:7000/api/document", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then((result) => {
+            }).then(async (result) => {
                 Toast.show({
                     type: 'success',
                     text1: 'Uploaded success',
                     position: 'top',
                     visibilityTime: 2000,
                 });
-                //Success
-                props.navigation.navigate("Success")
+                await props.navigation.navigate("Success")
 
-            }).catch((err) => {
-
+            }).catch(async (err) => {
+                console.log(err)
                 Toast.show({
                     type: 'error',
                     text1: 'Uploaded failed',
@@ -135,7 +133,7 @@ export default function DocumentUpload() {
                         paddingHorizontal: 10
                     },
                 });
-                props.navigation.navigate("Upload")
+                await props.navigation.navigate("Upload")
 
             })
         }
@@ -195,7 +193,7 @@ export default function DocumentUpload() {
                 </View>
                 {
                     addharname ? <Text style={{
-                        color: "blue", marginTop: 20, fontSize: 16,
+                        color: "blue", marginTop: 20, fontSize: 15,
                         fontWeight: 'bold',
                     }}>{addharname}</Text> : null
                 }
@@ -212,7 +210,7 @@ export default function DocumentUpload() {
                 </View>
                 {
                     panCard ? <Text style={{
-                        color: "blue", marginTop: 20, fontSize: 16,
+                        color: "blue", marginTop: 20, fontSize: 15,
                         fontWeight: 'bold',
                     }}>{panCard}</Text> : null
                 }
@@ -225,11 +223,15 @@ export default function DocumentUpload() {
                     <TouchableOpacity onPress={pickDocumentforForm16}>
                         <Text>Select File</Text>
                     </TouchableOpacity>
-                    {/* {fileUri && <Text>Selected File: {fixleUri}</Text>} */}
+                    {/* {
+                        form16name ? <Text style={{ margin: 10 }}>{form16name}</Text> : null
+                    } */}
+
                 </View>
                 {
                     form16name ? <Text style={{
-                        color: "blue", marginTop: 20, fontSize: 16,
+                        color: "blue", marginTop: 20, fontSize: 15,
+
                         fontWeight: 'bold',
                     }}>{form16name}</Text> : null
                 }
@@ -286,6 +288,7 @@ const styles = StyleSheet.create({
 
     },
     passwordbtn: {
+        margin: 10,
         display: "flex",
         justifyContent: 'center',
         alignItems: "center"
@@ -312,7 +315,8 @@ const styles = StyleSheet.create({
     },
     PersonalDetails: {
         color: "blue",
-        margin: 10,
+        margin: 15,
+        marginLeft: 20,
         fontSize: 17,
         fontWeight: "bold"
     },
